@@ -13,14 +13,53 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO & Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={Astro.url.href} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:site_name" content="Vértice EHS" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url.href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="/favicon.svg" />
+
+    <!-- Preconnect Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Schema.org (LocalBusiness / Organization) para AI Search -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "Vértice EHS",
+        "description": "Consultoría normativa STPS y Medio Ambiente para la industria manufacturera en México.",
+        "url": "https://vertice-ehs.mx",
+        "logo": "https://vertice-ehs.mx/favicon.svg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Querétaro",
+          "addressCountry": "MX"
+        },
+        "sameAs": []
+      }
+    </script>
   </head>
   <body class="bg-deep-void text-sovereign-white min-h-screen flex flex-col">
     <header class="sticky top-0 z-50 backdrop-blur-md bg-deep-void/80 border-b border-charcoal-surface">

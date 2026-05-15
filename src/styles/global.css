@@ -29,11 +29,13 @@ body {
   color: #F8FAFC;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(circle at 50% 0%, rgba(46, 158, 60, 0.05) 0%, transparent 70%);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Manrope', sans-serif;
   letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .catalog-section-divider {
@@ -41,37 +43,52 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 8rem;
 }
 
-/* Glassmorphism Classes */
+/* Glassmorphism Classes & No-Line Rule */
 .adn-glass-card {
-  border-radius: 1rem; /* rounded-2xl */
-  backdrop-filter: blur(20px);
-  background-color: rgba(10, 14, 20, 0.75);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: linear-gradient(145deg, rgba(10, 14, 20, 0.8), rgba(3, 5, 8, 0.6));
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
 }
 
 .adn-glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(46, 158, 60, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Buttons */
+/* Buttons (Neon Hover) */
 .btn-primary {
   border-radius: 9999px;
   background-color: var(--brand-green);
   color: white;
   padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  box-shadow: 0 8px 24px rgba(46, 158, 60, 0.25);
-  transition: all 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(46, 158, 60, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(rgba(255,255,255,0.1), transparent);
+  border-radius: 9999px;
 }
 
 .btn-primary:hover {
-  background-color: #268a32;
-  box-shadow: 0 8px 32px rgba(46, 158, 60, 0.4);
+  background-color: #34b344;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(46, 158, 60, 0.6), 0 0 15px rgba(46, 158, 60, 0.8);
 }
 
 /* Animated Border */

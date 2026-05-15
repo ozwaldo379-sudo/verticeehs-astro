@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep-void: #030508;
+  --color-charcoal-surface: #0a0e14;
+  --color-hazard-green: #2E9E3C;
+  --color-alert-orange: #E86650;
+  --color-muted-steel: #94A3B8;
+  --color-sovereign-white: #F8FAFC;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Manrope', sans-serif;
+}
+
+@property --adn-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --bg-base: #030508;
+  --bg-surface: #0a0e14;
+  --brand-green: #2E9E3C;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: #F8FAFC;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.catalog-section-divider {
+  margin-top: 8rem; /* py-32 equivalent */
+  margin-bottom: 8rem;
+}
+
+/* Glassmorphism Classes */
+.adn-glass-card {
+  border-radius: 1rem; /* rounded-2xl */
+  backdrop-filter: blur(20px);
+  background-color: rgba(10, 14, 20, 0.75);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.adn-glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Buttons */
+.btn-primary {
+  border-radius: 9999px;
+  background-color: var(--brand-green);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(46, 158, 60, 0.25);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: #268a32;
+  box-shadow: 0 8px 32px rgba(46, 158, 60, 0.4);
+}
+
+/* Animated Border */
+@keyframes border-rotate {
+  to {
+    --adn-angle: 360deg;
+  }
+}
+
+.adn-animated-border {
+  position: relative;
+  border-radius: 1rem;
+  padding: 2px;
+  background: conic-gradient(from var(--adn-angle), transparent 0%, transparent 75%, var(--brand-green) 100%);
+  animation: border-rotate 4s linear infinite;
+  z-index: 1;
+}
+
+.adn-animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background-color: var(--bg-surface);
+  border-radius: calc(1rem - 2px);
+  z-index: -1;
+}

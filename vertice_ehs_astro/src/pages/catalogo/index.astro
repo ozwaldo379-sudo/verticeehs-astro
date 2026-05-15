@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const services = [
+  {
+    id: 'seguridad',
+    title: 'Seguridad y Salud (STPS)',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    items: [
+      { name: 'NOM-030-STPS', desc: 'Servicios preventivos de seguridad y salud en el trabajo.' },
+      { name: 'NOM-019-STPS', desc: 'Comisiones de seguridad e higiene. Constitución e integración.' },
+      { name: 'NOM-035-STPS', desc: 'Factores de riesgo psicosocial en el trabajo: Prevención.' },
+      { name: 'NOM-036-1-STPS', desc: 'Riesgo ergonómico: Manejo manual de cargas.' }
+    ]
+  },
+  {
+    id: 'medio-ambiente',
+    title: 'Medio Ambiente',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    items: [
+      { name: 'Cédula de Operación Anual (COA)', desc: 'Reporte de emisiones y transferencias de contaminantes.' },
+      { name: 'Manifiesto de Impacto Ambiental (MIA)', desc: 'Evaluación del impacto de nuevas operaciones.' },
+      { name: 'Licencia Ambiental Única (LAU)', desc: 'Regulación integral de fuentes fijas.' }
+    ]
+  },
+  {
+    id: 'sistemas',
+    title: 'Sistemas de Gestión',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+    items: [
+      { name: 'ISO 14001', desc: 'Implementación y auditoría de Gestión Ambiental.' },
+      { name: 'ISO 45001', desc: 'Implementación y auditoría de Seguridad y Salud Ocupacional.' },
+      { name: 'PASST (STPS)', desc: 'Programa de Autogestión en Seguridad y Salud en el Trabajo.' }
+    ]
+  }
+];
+---
+
+<Layout title="Catálogo de Servicios NOMs | Vértice EHS">
+  <section class="pt-32 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
+        Catálogo de Servicios Técnicos
+      </h1>
+      <p class="text-xl text-muted-steel max-w-3xl mx-auto mb-16">
+        Cumplimiento absoluto sin fricciones. Explora nuestras soluciones diseñadas para mitigar el riesgo operativo y normativo de tu planta.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+        {services.map(category => (
+          <div id={category.id} class="adn-glass-card p-8 flex flex-col">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="h-10 w-10 rounded-lg bg-hazard-green/20 text-hazard-green flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={category.icon} />
+                </svg>
+              </div>
+              <h2 class="text-2xl font-bold font-heading">{category.title}</h2>
+            </div>
+
+            <div class="space-y-4 flex-grow">
+              {category.items.map(item => (
+                <div class="border-l-2 border-charcoal-surface pl-4 hover:border-hazard-green transition-colors">
+                  <h3 class="font-bold text-sovereign-white">{item.name}</h3>
+                  <p class="text-sm text-muted-steel mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-8">
+               <a href="/contacto" class="text-hazard-green text-sm font-medium hover:underline inline-flex items-center">
+                Cotizar servicios {category.title.split(' ')[0]}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+               </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-20">
+         <div class="adn-animated-border inline-block">
+            <a href="/contacto" class="bg-charcoal-surface px-8 py-4 rounded-xl flex items-center justify-center font-bold hover:bg-deep-void transition-colors">
+              ¿No encuentras la NOM que necesitas? Hablemos.
+            </a>
+         </div>
+      </div>
+    </div>
+  </section>
+</Layout>

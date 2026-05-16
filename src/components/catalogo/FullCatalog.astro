@@ -1,0 +1,151 @@
+---
+// FullCatalog.astro
+const categories = [
+  { id: 'higiene', name: 'Higiene y Seguridad' },
+  { id: 'brigadas', name: 'Brigadas y Protección Civil' },
+  { id: 'noms', name: 'Seguridad Industrial · NOMs' },
+  { id: 'estudios', name: 'Estudios y Mediciones' }
+];
+
+const catalogItems = [
+  // Higiene y Seguridad / Seguridad Industrial
+  { id: 'NOM-009', title: 'NOM-009-STPS · Trabajos en Alturas', duration: '8 HRS', desc: 'Sistemas anticaídas y rescate. Para personal con actividades a más de 1.80 m.', category: ['higiene', 'noms'] },
+  { id: 'NOM-033', title: 'NOM-033-STPS · Espacios Confinados', duration: '8 HRS', desc: 'Atmósferas peligrosas, permisos de trabajo y rescate básico.', category: ['higiene', 'noms'] },
+  { id: 'NOM-029', title: 'NOM-029-STPS · Instalaciones Eléctricas', duration: '8 HRS', desc: 'Seguridad en mantenimiento eléctrico y operación de equipos.', category: ['higiene', 'noms'] },
+  { id: 'Sustancias', title: 'Manejo de Sustancias Químicas Peligrosas', duration: '8 HRS', desc: 'Identificación, almacenamiento, manejo seguro. Alineado a NOM-005 / SEMARNAT.', category: ['higiene', 'noms'] },
+  { id: 'Montacargas', title: 'Medidas de Seguridad para Montacargas', duration: '8 HRS', desc: 'Operación segura, revisión diaria, manejo de cargas. NOM-006-STPS.', category: ['higiene'] },
+  { id: 'NOM-002', title: 'NOM-002-STPS · Prevención contra Incendios', duration: '8 HRS', desc: 'Teórico-práctico. Uso de extintores, clasificación de fuegos y evacuación.', category: ['higiene', 'noms', 'brigadas'] },
+  { id: 'NOM-026', title: 'NOM-026-STPS · Colores y Señales de Seguridad', duration: '8 HRS', desc: 'Interpretación y aplicación de señalética. Identificación de fluidos.', category: ['higiene', 'noms'] },
+  { id: 'NOM-027', title: 'NOM-027-STPS · Soldadura y Corte', duration: '8 HRS', desc: 'Riesgos: radiación, humos metálicos, EPP requerido, autorizaciones.', category: ['higiene', 'noms'] },
+  { id: 'NOM-035', title: 'NOM-035-STPS · Factores Psicosociales', duration: '8 HRS', desc: 'Identificación, análisis y prevención. Incluye cuestionarios y evaluación.', category: ['higiene', 'noms'] },
+  { id: 'NOM-001', title: 'NOM-001-STPS · Condiciones en Edificios', duration: '12 HRS', desc: 'Verificación de condiciones físicas, pasillos, techos y salidas.', category: ['higiene', 'noms'] },
+  { id: 'NOM-017', title: 'NOM-017-STPS · Equipo de Protección Personal', duration: '8 HRS', desc: 'Selección, uso correcto, almacenamiento y vida útil según riesgo.', category: ['higiene', 'noms'] },
+  { id: 'NOM-019', title: 'NOM-019-STPS · Comisiones de Seguridad e Higiene', duration: '12 HRS', desc: 'Integración, funciones, calendario de recorridos y actas. Cumplimiento completo.', category: ['higiene', 'noms'] },
+  { id: 'NOM-030', title: 'NOM-030-STPS · Programa Preventivo de SST', duration: '24 HRS', desc: 'Diseño e implementación del Programa de Seguridad y Salud en el Trabajo.', category: ['higiene', 'noms'] },
+  { id: 'NOM-031', title: 'NOM-031-STPS · Seguridad en Construcciones', duration: '24 HRS', desc: 'Obras de remodelación, mantenimiento mayor y construcción en centro de trabajo.', category: ['higiene', 'noms'] },
+  
+  // Brigadas y Protección Civil
+  { id: 'Busqueda', title: 'Búsqueda y Rescate', duration: '16 HRS', desc: 'Técnicas de localización y extracción de víctimas en interior de edificios.', category: ['brigadas'] },
+  { id: 'Simulacros', title: 'Elaboración de Simulacros', duration: '16 HRS', desc: 'Diseño, coordinación y evaluación. Cumplimiento Ley de PC.', category: ['brigadas'] },
+  { id: 'Evacuacion', title: 'Evacuación y Repliegue', duration: '16 HRS', desc: 'Rutas, puntos de reunión, conteo de personal y roles de brigada.', category: ['brigadas'] },
+  { id: 'Comunicacion', title: 'La Comunicación en una Emergencia', duration: '8 HRS', desc: 'Protocolos internos, autoridades, uso de radios y señales.', category: ['brigadas'] },
+  { id: 'Fuego', title: 'Química del Fuego', duration: '18 HRS', desc: 'Triángulo y tetraedro del fuego, clases de incendio, agentes extinguidores, BLEVE.', category: ['brigadas'] },
+  
+  // Estudios y Mediciones
+  { id: 'Iluminacion', title: 'Iluminación en el Centro de Trabajo', duration: 'POR ÁREA', desc: 'Medición luxométrica conforme a NOM-025-STPS. Informe técnico y recomendaciones.', category: ['estudios'] },
+  { id: 'Ruido', title: 'Ruido Laboral', duration: 'POR ÁREA', desc: 'Nivel de presión sonora continuo equivalente. NOM-011-STPS.', category: ['estudios'] },
+  { id: 'Termicas', title: 'Condiciones Térmicas Elevadas / Abatidas', duration: 'POR ÁREA', desc: 'Evaluación de estrés térmico e índice WBGT. NOM-015-STPS.', category: ['estudios'] },
+  { id: 'Vibraciones', title: 'Vibraciones', duration: 'POR ÁREA', desc: 'Medición cuerpo entero y mano-brazo. NOM-024-STPS.', category: ['estudios'] },
+  { id: 'Tierras', title: 'Puesta a Tierra / Tierras Físicas', duration: 'POR PUNTO', desc: 'Verificación de continuidad y resistencia. NOM-022-STPS.', category: ['estudios'] }
+];
+---
+
+<section class="py-24 relative z-10" id="catalogo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-block tracking-[0.3em] text-xs font-bold text-hazard-green uppercase mb-4">
+        FORMACIÓN ESTRATÉGICA
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold font-heading text-sovereign-white mb-6">
+        Catálogo de <span class="gradient-title">Capacitación</span>
+      </h2>
+      <p class="text-muted-steel text-lg mb-4 font-medium">Personal entrenado es personal que no detiene la producción.</p>
+      <p class="text-hazard-green text-sm font-bold tracking-widest uppercase">TODOS LOS CURSOS INCLUYEN CONSTANCIA DC-3 ANTE LA STPS</p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap justify-center gap-4 mb-16" id="catalog-tabs">
+      <button class="catalog-tab active px-6 py-3 rounded-xl border border-hazard-green/50 bg-hazard-green/10 text-hazard-green font-bold text-sm transition-all shadow-[0_0_15px_rgba(0,229,153,0.15)]" data-target="higiene">
+        Higiene y Seguridad
+      </button>
+      <button class="catalog-tab px-6 py-3 rounded-xl border border-white/10 bg-transparent text-muted-steel font-medium text-sm hover:border-white/30 hover:text-sovereign-white transition-all" data-target="brigadas">
+        Brigadas y Protección Civil
+      </button>
+      <button class="catalog-tab px-6 py-3 rounded-xl border border-white/10 bg-transparent text-muted-steel font-medium text-sm hover:border-white/30 hover:text-sovereign-white transition-all" data-target="noms">
+        Seguridad Industrial · NOMs
+      </button>
+      <button class="catalog-tab px-6 py-3 rounded-xl border border-white/10 bg-transparent text-muted-steel font-medium text-sm hover:border-white/30 hover:text-sovereign-white transition-all" data-target="estudios">
+        Estudios y Mediciones
+      </button>
+    </div>
+
+    <!-- Catalog Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-500" id="catalog-grid">
+      {catalogItems.map(item => (
+        <div class="catalog-item adn-glass-card p-8 rounded-2xl border border-white/5 hover:border-hazard-green/30 transition-all group flex flex-col h-full" data-categories={item.category.join(',')}>
+          <div class="flex justify-between items-start mb-6 gap-4">
+            <h3 class="text-xl font-bold font-heading text-sovereign-white group-hover:text-hazard-green transition-colors leading-tight">
+              {item.title}
+            </h3>
+            <span class="px-3 py-1 bg-hazard-green/10 text-hazard-green text-[10px] font-black tracking-wider rounded-md whitespace-nowrap border border-hazard-green/20">
+              {item.duration}
+            </span>
+          </div>
+          <p class="text-muted-steel text-sm leading-relaxed mt-auto font-medium">
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.catalog-tab');
+    const items = document.querySelectorAll('.catalog-item');
+    const grid = document.getElementById('catalog-grid');
+
+    // Initial filter
+    filterItems('higiene');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        const target = (e.currentTarget as HTMLElement).getAttribute('data-target');
+        if (!target) return;
+
+        // Update active tab styles
+        tabs.forEach(t => {
+          t.classList.remove('active', 'border-hazard-green/50', 'bg-hazard-green/10', 'text-hazard-green', 'font-bold', 'shadow-[0_0_15px_rgba(0,229,153,0.15)]');
+          t.classList.add('border-white/10', 'bg-transparent', 'text-muted-steel', 'font-medium');
+        });
+        
+        const activeTab = e.currentTarget as HTMLElement;
+        activeTab.classList.remove('border-white/10', 'bg-transparent', 'text-muted-steel', 'font-medium');
+        activeTab.classList.add('active', 'border-hazard-green/50', 'bg-hazard-green/10', 'text-hazard-green', 'font-bold', 'shadow-[0_0_15px_rgba(0,229,153,0.15)]');
+
+        // Fade out grid
+        if(grid) {
+            grid.style.opacity = '0';
+            
+            setTimeout(() => {
+                filterItems(target);
+                grid.style.opacity = '1';
+            }, 300);
+        }
+      });
+    });
+
+    function filterItems(category: string) {
+      items.forEach(item => {
+        const categories = item.getAttribute('data-categories')?.split(',') || [];
+        if (categories.includes(category)) {
+          (item as HTMLElement).style.display = 'flex';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .catalog-item {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

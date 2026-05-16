@@ -115,3 +115,78 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: calc(1rem - 2px);
   z-index: -1;
 }
+
+/* ============================================================
+   GRADIENT TITLE SYSTEM — 3 Logo Colors (Design Spell)
+   Green #2E9E3C · Blue #1A5CE6 · White #F8FAFC
+   ============================================================ */
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Primary: flows green → blue → white → blue → green (infinite) */
+.gradient-title {
+  background: linear-gradient(
+    120deg,
+    #2E9E3C 0%,
+    #1A5CE6 35%,
+    #F8FAFC 60%,
+    #1A5CE6 80%,
+    #2E9E3C 100%
+  );
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 8s ease infinite;
+  display: inline-block; /* required for background-clip */
+}
+
+/* Subtle variant: muted tones, less saturation — for body-level accents */
+.gradient-title-subtle {
+  background: linear-gradient(
+    135deg,
+    rgba(46, 158, 60, 0.9)  0%,
+    rgba(26, 92, 230, 0.85) 50%,
+    rgba(248, 250, 252, 0.95) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 10s ease infinite;
+  display: inline-block;
+}
+
+/* Accent: green dominant — for H2/H3 section labels */
+.gradient-accent {
+  background: linear-gradient(
+    90deg,
+    #2E9E3C 0%,
+    #48D36A 40%,
+    #1A5CE6 75%,
+    #2E9E3C 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 6s linear infinite;
+  display: inline-block;
+}
+
+/* ============================================================
+   Z-INDEX STACKING CONTEXT
+   Canvas is fixed z-0; all page content must be z-10+
+   ============================================================ */
+
+main, header, footer, section, .relative {
+  position: relative;
+}
+

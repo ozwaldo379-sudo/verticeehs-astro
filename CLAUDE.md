@@ -16,6 +16,18 @@ Evita el "AI Slop" (diseños genéricos, texto de relleno aburrido o layouts pre
 - **Micro-animaciones:** Las tarjetas deben tener hover effects: `border-beam`, `accent glow`. NUNCA diseños estáticos o aburridos.
 - **Spacing estándar:** `py-32` en todas las secciones principales. Usar `.catalog-section-divider` para separar secciones.
 
+### 🌌 Particle Background (GLOBAL — NO REMOVER)
+- **Componente:** `ParticleBackground.astro` inyectado en `Layout.astro` → aplica a TODAS las páginas.
+- **Colores (3 colores del logo):** Green `#2E9E3C`, Blue `#1A5CE6`, White `#F8FAFC`.
+- **Canvas:** `position: fixed; z-index: 0`. Todo el contenido de página en `z-index: 1+`.
+- **Performance:** Vanilla Canvas 2D + `requestAnimationFrame`. Respeta `prefers-reduced-motion`.
+
+### 🎨 Gradient Title System (GLOBAL)
+- **Clases disponibles:** `.gradient-title` (principal), `.gradient-title-subtle`, `.gradient-accent`.
+- **Uso correcto:** Aplicar a UNA palabra o span dentro del heading. NO al heading completo.
+- **Animación:** `gradient-shift` 8s ease infinite. Los 3 colores del logo fluyen suavemente.
+- **Ejemplo:** `<h2>Catálogo de <span class="gradient-title">Capacitación</span></h2>`
+
 
 
 # 2. REGLAS DE ARQUITECTURA DEL SITIO (DO'S AND DON'TS)

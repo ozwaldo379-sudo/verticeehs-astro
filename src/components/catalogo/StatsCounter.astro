@@ -1,0 +1,68 @@
+---
+// StatsCounter.astro
+const stats = [
+  { value: 2.8, prefix: '$', suffix: 'M+', label: 'MULTA MÁXIMA STPS', decimals: 1 },
+  { value: 29, prefix: '', suffix: '', label: 'PROGRAMAS DE CAPACITACIÓN', decimals: 0 },
+  { value: 100, prefix: '', suffix: '%', label: 'AUDITABILIDAD DIGITAL', decimals: 0 },
+  { value: 0, prefix: '', suffix: '', label: 'TOLERANCIA AL CUMPLIMIENTO FALSO', decimals: 0 }
+];
+---
+
+<section class="py-24 border-y border-white/5 bg-charcoal-surface relative z-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center" id="stats-container">
+      {stats.map((stat, index) => (
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-5xl md:text-6xl font-black font-heading tracking-tighter mb-4 flex items-baseline justify-center">
+            {stat.prefix && <span class="text-sovereign-white">{stat.prefix}</span>}
+            <span 
+              class="stat-number bg-clip-text text-transparent bg-gradient-to-r from-sovereign-white to-sovereign-white" 
+              data-target={stat.value} 
+              data-decimals={stat.decimals}
+              class:list={[index === 1 || index === 2 ? "!from-hazard-green !to-hazard-green" : ""]}
+            >0</span>
+            {stat.suffix && <span class:list={["", index === 1 || index === 2 ? "text-hazard-green" : "text-sovereign-white"]}>{stat.suffix}</span>}
+          </div>
+          <p class="text-xs tracking-[0.2em] text-muted-steel uppercase font-bold">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function animateValue(obj, start, end, duration, decimals) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      // easeOutExpo
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = start + easeProgress * (end - start);
+      obj.innerHTML = current.toFixed(decimals);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const stats = entry.target.querySelectorAll('.stat-number');
+        stats.forEach((stat: any) => {
+          const target = parseFloat(stat.getAttribute('data-target'));
+          const decimals = parseInt(stat.getAttribute('data-decimals'));
+          animateValue(stat, 0, target, 2000, decimals);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const container = document.getElementById('stats-container');
+  if (container) {
+    observer.observe(container);
+  }
+</script>

@@ -39,3 +39,22 @@ La interfaz debe transmitir autoridad, precisión quirúrgica y un sentido de ur
 *   **Bento Grid:** Las secciones del catálogo usan estructuras asimétricas (Bento box) para organizar información densa sin abrumar.
 *   **Physicality (ScrollSpy & 3D):** Los elementos entran con micro-animaciones (framer-motion) de abajo hacia arriba (`y: 20 -> y: 0`) con ligeros retrasos (*stagger*) para guiar la lectura.
 *   **Espaciado (Breathable Density):** Secciones separadas por márgenes masivos (`py-32` o `8rem`) para dar "aire" a cada declaración del manifiesto.
+
+## 6. Ambient Particle System (Design Spell — GLOBAL)
+*   **Componente:** `src/components/ParticleBackground.astro`. Se inyecta en `Layout.astro` — aplica a **todas** las páginas del sitio.
+*   **Tecnología:** Canvas 2D API (Vanilla JS). Zero dependencias externas. GPU-accelerated con `requestAnimationFrame`. Respeta `prefers-reduced-motion`.
+*   **Colores de Partículas:** Los 3 colores del logo de Vértice EHS:
+    *   `rgba(46, 158, 60, ...)` — Hazard Green
+    *   `rgba(26, 92, 230, ...)` — Logo Blue
+    *   `rgba(248, 250, 252, ...)` — Sovereign White
+*   **Comportamiento:** Partículas circulares (radio 0.8–2.2px) flotando con velocidad muy baja (±0.18 px/frame). Alpha pulsando suavemente ("breathing"). El canvas es `position: fixed; z-index: 0` para no bloquear interacciones.
+*   **Regla:** Todo contenido de la página debe vivir en `z-index: 1+` para aparecer sobre las partículas.
+
+## 7. Gradient Title System (Design Spell — GLOBAL)
+*   **Paleta:** Los mismos 3 colores del logo en gradiente animado: `#2E9E3C → #1A5CE6 → #F8FAFC → #1A5CE6 → #2E9E3C`.
+*   **Animación:** `gradient-shift` keyframe. `background-size: 250% 250%`. Ciclo de 8s suave.
+*   **Clases CSS disponibles (en `global.css`):**
+    *   `.gradient-title` — Uso principal. Para spans dentro de H1/H2 grandes.
+    *   `.gradient-title-subtle` — Versión desaturada. Para accentos secundarios.
+    *   `.gradient-accent` — Verde dominante. Para H3 o palabras clave de impacto.
+*   **Regla:** Aplicar solo a *una* palabra o frase por sección, no a headings completos. El contraste con el texto blanco circundante es lo que genera el impacto visual.

@@ -1,108 +1,36 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
-const services = [
-  {
-    id: 'seguridad',
-    title: 'Seguridad y Salud (STPS)',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    items: [
-      { name: 'NOM-030-STPS', desc: 'Servicios preventivos de seguridad y salud en el trabajo.' },
-      { name: 'NOM-019-STPS', desc: 'Comisiones de seguridad e higiene. Constitución e integración.' },
-      { name: 'NOM-035-STPS', desc: 'Factores de riesgo psicosocial en el trabajo: Prevención.' },
-      { name: 'NOM-036-1-STPS', desc: 'Riesgo ergonómico: Manejo manual de cargas.' },
-      { name: 'NOM-001-STPS', desc: 'Edificios, locales, instalaciones y áreas en los centros de trabajo.' },
-      { name: 'NOM-002-STPS', desc: 'Condiciones de seguridad - Prevención y protección contra incendios.' }
-    ]
-  },
-  {
-    id: 'medio-ambiente',
-    title: 'Medio Ambiente',
-    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-    items: [
-      { name: 'Cédula de Operación Anual (COA)', desc: 'Reporte de emisiones y transferencias de contaminantes.' },
-      { name: 'Manifiesto de Impacto Ambiental (MIA)', desc: 'Evaluación del impacto de nuevas operaciones.' },
-      { name: 'Licencia Ambiental Única (LAU)', desc: 'Regulación integral de fuentes fijas.' },
-      { name: 'Plan de Manejo de Residuos', desc: 'Gestión integral de residuos peligrosos y de manejo especial.' }
-    ]
-  },
-  {
-    id: 'sistemas',
-    title: 'Sistemas de Gestión',
-    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-    items: [
-      { name: 'ISO 14001', desc: 'Implementación y auditoría de Gestión Ambiental.' },
-      { name: 'ISO 45001', desc: 'Implementación y auditoría de Seguridad y Salud Ocupacional.' },
-      { name: 'PASST (STPS)', desc: 'Programa de Autogestión en Seguridad y Salud en el Trabajo.' },
-      { name: 'Auditorías de Tercera Parte', desc: 'Verificación independiente de cumplimiento normativo.' }
-    ]
-  }
-];
+import HeroCatalogo from '../../components/catalogo/HeroCatalogo.astro';
+import StatsCounter from '../../components/catalogo/StatsCounter.astro';
+import ManifestoQuote from '../../components/catalogo/ManifestoQuote.astro';
+import FullCatalog from '../../components/catalogo/FullCatalog.astro';
 ---
 
 <Layout title="Catálogo de Servicios NOMs | Vértice EHS">
-  <section class="pt-40 pb-32 relative overflow-hidden">
-    <!-- Subtle Grid Background -->
-    <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="text-center mb-24">
-        <div class="inline-block px-4 py-2 rounded-full bg-hazard-green/10 border border-hazard-green/20 backdrop-blur-md text-[10px] font-black tracking-[0.4em] text-hazard-green uppercase mb-6">
-          DIRECTORIO TÉCNICO
-        </div>
-        <h1 class="text-5xl md:text-7xl font-bold font-heading mb-8 tracking-tighter text-sovereign-white">
-          Catálogo de Servicios <span class="text-hazard-green italic font-light">Especializados</span>
-        </h1>
-        <p class="text-xl text-muted-steel max-w-3xl mx-auto leading-relaxed font-medium">
-          Cumplimiento absoluto sin fricciones operativas. Explora nuestras soluciones diseñadas para blindar su planta ante cualquier inspección.
-        </p>
-      </div>
+  <div class="bg-deep-void min-h-screen">
+    <HeroCatalogo />
+    <StatsCounter />
+    <ManifestoQuote />
+    <FullCatalog />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {services.map(category => (
-          <div id={category.id} class="adn-glass-card p-10 flex flex-col group">
-            <div class="flex items-center gap-5 mb-10">
-              <div class="h-14 w-14 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={category.icon} />
-                </svg>
-              </div>
-              <h2 class="text-2xl font-bold font-heading text-sovereign-white group-hover:text-hazard-green transition-colors">{category.title}</h2>
-            </div>
-
-            <div class="space-y-6 flex-grow">
-              {category.items.map(item => (
-                <div class="border-l-2 border-white/5 pl-6 hover:border-hazard-green transition-all duration-300">
-                  <h3 class="font-bold text-sovereign-white text-lg mb-1">{item.name}</h3>
-                  <p class="text-sm text-muted-steel leading-relaxed font-medium">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div class="mt-12 pt-8 border-t border-white/5">
-               <a href="https://wa.me/522224596850" target="_blank" class="text-hazard-green text-sm font-black uppercase tracking-widest hover:text-sovereign-white inline-flex items-center group/link">
-                COTIZAR SERVICIOS {category.title.split(' ')[0]}
-                <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-               </a>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <!-- Specialized Consultation Banner -->
-      <div class="mt-32">
+    <!-- Specialized Consultation Banner -->
+    <section class="pb-32 pt-16 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
          <div class="adn-animated-border">
             <div class="bg-charcoal-surface px-10 py-12 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-10">
               <div class="max-w-2xl">
                 <h3 class="text-2xl md:text-3xl font-bold font-heading text-sovereign-white mb-4">¿Requiere una NOM fuera de este catálogo?</h3>
                 <p class="text-muted-steel text-lg font-medium">Contamos con una red de especialistas certificados para cualquier requerimiento técnico de la STPS o SEMARNAT.</p>
               </div>
-              <a href="https://wa.me/522224596850" target="_blank" class="btn-primary px-10 py-5 text-lg font-black whitespace-nowrap">
-                Consultar Especialista →
+              <a href="https://wa.me/522224596850" target="_blank" class="btn-primary px-10 py-5 text-lg font-black whitespace-nowrap group">
+                <span class="flex items-center gap-2">
+                  Consultar Especialista
+                  <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </span>
               </a>
             </div>
          </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Layout>

@@ -1,0 +1,85 @@
+---
+const galleryItems = [
+  {
+    src: '/galeria/auxilios.png',
+    title: 'Primeros Auxilios & Rescate',
+    tag: 'CAPACITACIÓN',
+    desc: 'Brigadas entrenadas con protocolos certificados de respuesta inmediata ante emergencias médicas.',
+  },
+  {
+    src: '/galeria/incendio.png',
+    title: 'Brigadas contra Incendio',
+    tag: 'PROTECCIÓN CIVIL',
+    desc: 'Formación práctica con equipos SCBA y trajes de proximidad homologados.',
+  },
+  {
+    src: '/galeria/inspeccion.png',
+    title: 'Inspección & Calibración',
+    tag: 'EQUIPOS CRÍTICOS',
+    desc: 'Verificación y calibración de válvulas, manómetros y equipos de presión industrial.',
+  },
+];
+---
+
+<section id="galeria" class="py-32 relative bg-gradient-to-b from-deep-void to-charcoal-surface overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-20">
+      <div class="inline-block px-4 py-2 rounded-full bg-hazard-green/10 border border-hazard-green/20 backdrop-blur-md text-[10px] font-black tracking-[0.4em] text-hazard-green uppercase mb-6">
+        TRABAJOS EN CAMPO
+      </div>
+      <h2 class="text-4xl md:text-6xl font-bold font-heading text-sovereign-white mb-6 tracking-tight">
+        Evidencia Real. <span class="text-hazard-green">Resultados Verificables.</span>
+      </h2>
+      <p class="text-xl text-muted-steel max-w-2xl mx-auto leading-relaxed font-medium">
+        Cada imagen representa una capacitación entregada, un riesgo mitigado y una empresa blindada ante la autoridad.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {galleryItems.map((item) => (
+        <div class="relative group overflow-hidden rounded-3xl border border-white/5 aspect-[4/5] adn-glass-card">
+          <!-- Photo -->
+          <img 
+            src={item.src} 
+            alt={item.title} 
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          
+          <!-- Gradient overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-deep-void via-deep-void/40 to-transparent opacity-80 transition-opacity group-hover:opacity-90"></div>
+          
+          <!-- Content -->
+          <div class="absolute inset-0 p-8 flex flex-col justify-end">
+            <div class="mb-4">
+              <span class="text-[10px] font-black tracking-widest text-hazard-green bg-deep-void/80 backdrop-blur-md border border-hazard-green/30 px-3 py-1 rounded-full uppercase">
+                {item.tag}
+              </span>
+            </div>
+            
+            <h3 class="text-2xl font-bold font-heading text-sovereign-white mb-2 transition-colors group-hover:text-hazard-green">
+              {item.title}
+            </h3>
+            
+            <p class="text-muted-steel text-sm leading-relaxed opacity-0 max-h-0 transition-all duration-500 group-hover:opacity-100 group-hover:max-h-20 group-hover:mb-4 font-medium">
+              {item.desc}
+            </p>
+            
+            <!-- Bottom Line -->
+            <div class="h-1 w-0 bg-hazard-green transition-all duration-500 group-hover:w-full"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Authority Strip -->
+    <div class="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div>
+        <p class="text-[10px] font-black text-hazard-green tracking-[0.4em] uppercase mb-2">MÁS DE 200 EMPRESAS BLINDADAS EN MÉXICO</p>
+        <p class="text-2xl font-bold font-heading text-sovereign-white tracking-tight">¿Su equipo está realmente preparado?</p>
+      </div>
+      <a href="https://wa.me/522224596850" target="_blank" class="btn-primary px-10 py-5 text-lg font-black">
+        Solicitar Diagnóstico →
+      </a>
+    </div>
+  </div>
+</section>

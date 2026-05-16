@@ -1,0 +1,148 @@
+---
+---
+
+<section id="calculadora" class="py-32 bg-charcoal-surface relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center justify-center p-3 rounded-xl bg-hazard-green/10 text-hazard-green mb-6">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+      </div>
+      <h2 class="text-4xl font-bold font-heading mb-4 text-sovereign-white">Calculadora de Riesgo por Incumplimiento</h2>
+      <p class="text-xl text-muted-steel max-w-2xl mx-auto">
+        Estime el costo potencial de no cumplir vs. la inversión estratégica en prevención.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- Input Panel -->
+      <div class="adn-glass-card p-8 md:p-10">
+        <div class="space-y-10">
+          <div>
+            <label class="block text-sm font-bold text-muted-steel uppercase tracking-widest mb-6">Sector de su empresa</label>
+            <div class="flex flex-wrap gap-3" id="industry-selector">
+              <button data-multiplier="2.5" class="industry-pill active px-4 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-hazard-green">Manufactura</button>
+              <button data-multiplier="3.0" class="industry-pill px-4 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-hazard-green">Construcción</button>
+              <button data-multiplier="2.0" class="industry-pill px-4 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-hazard-green">Logística</button>
+              <button data-multiplier="1.2" class="industry-pill px-4 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-hazard-green">Corporativo</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-6">
+              <label class="text-sm font-bold text-muted-steel uppercase tracking-widest">Número de empleados</label>
+              <span class="text-hazard-green font-bold text-lg" id="employee-count-display">80</span>
+            </div>
+            <input 
+              type="range" 
+              min="10" 
+              max="1000" 
+              step="10" 
+              value="80" 
+              id="employee-range"
+              class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-hazard-green"
+            />
+            <div class="flex justify-between mt-4 text-[10px] text-muted-steel font-bold uppercase tracking-widest">
+              <span>10 EMPLEADOS</span>
+              <span>1,000+ EMPLEADOS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="adn-glass-card p-8 md:p-10 bg-deep-void/40 border-hazard-green/10">
+        <div class="space-y-6">
+          <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/10">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              <span class="text-xs font-bold text-muted-steel uppercase tracking-wider">Riesgo estimado de multas</span>
+            </div>
+            <div class="text-3xl md:text-4xl font-bold text-red-500 font-heading">
+              $<span id="total-risk-display">600,000</span> MXN
+            </div>
+          </div>
+
+          <div class="flex justify-center">
+            <span class="text-xs font-bold text-muted-steel uppercase tracking-[0.3em] opacity-30">VS</span>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-hazard-green/5 border border-hazard-green/10">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-5 h-5 text-hazard-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span class="text-xs font-bold text-muted-steel uppercase tracking-wider">Inversión en prevención</span>
+            </div>
+            <div class="text-3xl md:text-4xl font-bold text-hazard-green font-heading">
+              $<span id="prevention-cost-display">25,000</span> MXN
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-white/5">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs font-bold text-muted-steel uppercase tracking-wider">ROI de Blindaje</span>
+              <span class="text-hazard-green font-bold" id="roi-percentage">95%</span>
+            </div>
+            <div class="w-full h-3 bg-white/5 rounded-full overflow-hidden">
+              <div id="roi-bar" class="h-full bg-hazard-green transition-all duration-500" style="width: 95%;"></div>
+            </div>
+            <p class="mt-4 text-xs text-muted-steel text-center italic">
+              Invertir en prevención representa solo el <span id="roi-text">5</span>% del costo potencial de sanciones.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .industry-pill.active {
+    background: rgba(46, 158, 60, 0.1);
+    border-color: #2E9E3C;
+    color: #2E9E3C;
+  }
+</style>
+
+<script>
+  const range = document.getElementById('employee-range');
+  const countDisplay = document.getElementById('employee-count-display');
+  const riskDisplay = document.getElementById('total-risk-display');
+  const preventionDisplay = document.getElementById('prevention-cost-display');
+  const roiPercentage = document.getElementById('roi-percentage');
+  const roiBar = document.getElementById('roi-bar');
+  const roiText = document.getElementById('roi-text');
+  const industryButtons = document.querySelectorAll('.industry-pill');
+
+  let currentMultiplier = 2.5;
+
+  function updateCalculator() {
+    const employees = parseInt(range.value);
+    countDisplay.textContent = employees;
+
+    const baseRisk = 25000;
+    const totalRisk = Math.round(baseRisk * currentMultiplier * (employees / 10) * 1.2);
+    const implementationCost = Math.round(18000 + (employees * 120) * currentMultiplier * 0.35);
+    
+    const riskRatio = (implementationCost / totalRisk) * 100;
+    const roi = 100 - riskRatio;
+
+    riskDisplay.textContent = totalRisk.toLocaleString('es-MX');
+    preventionDisplay.textContent = implementationCost.toLocaleString('es-MX');
+    roiPercentage.textContent = `${Math.round(roi)}%`;
+    roiBar.style.width = `${roi}%`;
+    roiText.textContent = Math.round(riskRatio);
+  }
+
+  range.addEventListener('input', updateCalculator);
+
+  industryButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      industryButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMultiplier = parseFloat(btn.dataset.multiplier);
+      updateCalculator();
+    });
+  });
+
+  // Initial call
+  updateCalculator();
+</script>

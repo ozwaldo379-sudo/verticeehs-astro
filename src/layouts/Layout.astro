@@ -10,7 +10,7 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,7 +43,7 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Schema.org (LocalBusiness / Organization) para AI Search -->
+    <!-- Schema.org (LegalService / Organization) para AI Search -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,63 +61,100 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
       }
     </script>
   </head>
-  <body class="bg-deep-void text-sovereign-white min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-deep-void/80 border-b border-charcoal-surface">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div class="flex-shrink-0">
-          <a href="/" class="text-2xl font-bold font-heading text-sovereign-white">
-            Vértice<span class="text-hazard-green">.</span>EHS
-          </a>
-        </div>
-        <nav class="hidden md:flex space-x-8">
-          <a href="/" class="text-muted-steel hover:text-sovereign-white transition-colors">Inicio</a>
-          <a href="/catalogo/" class="text-muted-steel hover:text-sovereign-white transition-colors">Catálogo NOMs</a>
-        </nav>
-        <div class="hidden md:flex">
-          <a href="/contacto" class="btn-primary text-sm px-4 py-2">
-            Evaluar Riesgo
-          </a>
+  <body class="bg-deep-void text-sovereign-white min-h-screen flex flex-col font-body selection:bg-hazard-green selection:text-deep-void">
+    <!-- Premium Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5 backdrop-blur-xl bg-deep-void/40" id="main-header">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="h-20 flex items-center justify-between">
+          <div class="flex-shrink-0">
+            <a href="/" class="group flex items-center gap-2">
+              <span class="text-2xl font-extrabold font-heading tracking-tighter text-sovereign-white group-hover:text-hazard-green transition-colors">
+                VÉRTICE<span class="text-hazard-green group-hover:text-sovereign-white">.</span>EHS
+              </span>
+            </a>
+          </div>
+          
+          <nav class="hidden md:flex items-center space-x-10">
+            <a href="/" class="text-xs font-bold uppercase tracking-[0.2em] text-muted-steel hover:text-hazard-green transition-all">Inicio</a>
+            <a href="/catalogo" class="text-xs font-bold uppercase tracking-[0.2em] text-muted-steel hover:text-hazard-green transition-all">Catálogo NOMs</a>
+            <a href="/#ADN" class="text-xs font-bold uppercase tracking-[0.2em] text-muted-steel hover:text-hazard-green transition-all">Autoridad</a>
+          </nav>
+
+          <div class="hidden md:flex items-center">
+            <a href="https://wa.me/522224596850" target="_blank" class="btn-primary text-[10px] font-black uppercase tracking-widest px-6 py-3">
+              Blindaje Normativo
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button class="md:hidden text-sovereign-white" id="mobile-menu-btn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          </button>
         </div>
       </div>
     </header>
 
-    <main class="flex-grow">
+    <main class="flex-grow pt-20">
       <slot />
     </main>
 
-    <footer class="bg-charcoal-surface border-t border-deep-void py-12 mt-auto">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <span class="text-xl font-bold font-heading text-sovereign-white">
-              Vértice<span class="text-hazard-green">.</span>EHS
+    <!-- Premium Footer -->
+    <footer class="bg-charcoal-surface/50 border-t border-white/5 py-24 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-deep-void opacity-50"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-24">
+          <div class="col-span-1 md:col-span-2">
+            <span class="text-3xl font-black font-heading text-sovereign-white tracking-tighter">
+              VÉRTICE<span class="text-hazard-green">.</span>EHS
             </span>
-            <p class="mt-4 text-muted-steel text-sm">
-              Blindaje técnico y legal para la industria manufacturera en México.
+            <p class="mt-8 text-xl text-muted-steel leading-relaxed max-w-md">
+              Ingeniería estratégica en cumplimiento normativo y blindaje industrial para el mercado mexicano.
             </p>
           </div>
+          
           <div>
-            <h3 class="text-sm font-semibold text-sovereign-white uppercase tracking-wider">Servicios</h3>
-            <ul class="mt-4 space-y-2">
-              <li><a href="/catalogo" class="text-sm text-muted-steel hover:text-hazard-green transition-colors">Seguridad STPS</a></li>
-              <li><a href="/catalogo" class="text-sm text-muted-steel hover:text-hazard-green transition-colors">Medio Ambiente</a></li>
-              <li><a href="/catalogo" class="text-sm text-muted-steel hover:text-hazard-green transition-colors">Sistemas de Gestión</a></li>
+            <h3 class="text-[10px] font-black text-hazard-green uppercase tracking-[0.4em] mb-8">SOLUCIONES</h3>
+            <ul class="space-y-4">
+              <li><a href="/catalogo#seguridad" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">Seguridad STPS</a></li>
+              <li><a href="/catalogo#medio-ambiente" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">Medio Ambiente</a></li>
+              <li><a href="/catalogo#sistemas" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">ISO 45001 / 14001</a></li>
             </ul>
           </div>
+          
           <div>
-            <h3 class="text-sm font-semibold text-sovereign-white uppercase tracking-wider">Contacto</h3>
-            <ul class="mt-4 space-y-2 text-sm text-muted-steel">
-              <li>contacto@vertice-ehs.mx</li>
-              <li>Querétaro, México</li>
+            <h3 class="text-[10px] font-black text-hazard-green uppercase tracking-[0.4em] mb-8">CONTACTO</h3>
+            <ul class="space-y-4">
+              <li class="text-sm font-medium text-muted-steel">📍 Querétaro, México</li>
+              <li><a href="mailto:contacto@vertice-ehs.mx" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">📩 contacto@vertice-ehs.mx</a></li>
+              <li><a href="https://wa.me/522224596850" target="_blank" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">📱 +52 222 459 6850</a></li>
             </ul>
           </div>
         </div>
-        <div class="mt-12 pt-8 border-t border-deep-void flex flex-col md:flex-row justify-between items-center">
-          <p class="text-sm text-muted-steel">
-            &copy; {new Date().getFullYear()} Vértice EHS. Todos los derechos reservados.
+        
+        <div class="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p class="text-[10px] font-bold text-muted-steel uppercase tracking-widest">
+            &copy; {new Date().getFullYear()} VÉRTICE EHS CONSULTORÍA. TODOS LOS DERECHOS RESERVADOS.
           </p>
+          <div class="flex gap-8">
+            <a href="#" class="text-[10px] font-bold text-muted-steel hover:text-hazard-green uppercase tracking-widest transition-colors">Privacidad</a>
+            <a href="#" class="text-[10px] font-bold text-muted-steel hover:text-hazard-green uppercase tracking-widest transition-colors">Términos</a>
+          </div>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Header scroll effect
+      const header = document.getElementById('main-header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header?.classList.add('py-2', 'shadow-2xl', 'bg-deep-void/90');
+          header?.classList.remove('py-0', 'bg-deep-void/40');
+        } else {
+          header?.classList.remove('py-2', 'shadow-2xl', 'bg-deep-void/90');
+          header?.classList.add('py-0', 'bg-deep-void/40');
+        }
+      });
+    </script>
   </body>
 </html>

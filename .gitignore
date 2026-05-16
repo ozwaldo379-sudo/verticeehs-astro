@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Legacy and local reference
+legacy_repo/
+agents/
+*.md
+!README.md
+!CLAUDE.md
+!DESIGN.md
+!HANDOFF.md
+!STRATEGY.MD
+!TASK.md

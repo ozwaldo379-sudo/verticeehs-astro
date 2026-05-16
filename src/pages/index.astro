@@ -1,104 +1,151 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ADNSection from '../components/ADNSection.astro';
+import TechnologySection from '../components/TechnologySection.astro';
+import ComplianceCalculator from '../components/ComplianceCalculator.astro';
+import GallerySection from '../components/GallerySection.astro';
 ---
 
 <Layout title="Vértice EHS | Blindaje Normativo STPS y Medio Ambiente">
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <h1 class="text-5xl md:text-7xl font-extrabold font-heading tracking-tight mb-8">
-        Tu planta está a una inspección de <span class="text-hazard-green block mt-2">detener operaciones.</span>
-      </h1>
-      <p class="mt-6 text-xl md:text-2xl text-muted-steel max-w-3xl mx-auto font-medium">
-        Blindaje técnico y legal para la industria en México. Asegura tu cumplimiento normativo ante la STPS y SEMARNAT sin perder tiempo ni recursos.
-      </p>
-      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#pilares" class="btn-primary text-lg px-8 py-4 font-bold">
-          Descubre tu nivel de riesgo hoy
-        </a>
-        <a href="/catalogo" class="inline-flex items-center justify-center px-8 py-4 border border-charcoal-surface rounded-full text-lg font-bold text-sovereign-white hover:bg-charcoal-surface transition-colors">
-          Ver Catálogo NOMs
-        </a>
+  <!-- Hero Section with Video Background -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Video Background Overlay -->
+    <div class="absolute inset-0 z-0">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        class="absolute inset-0 w-full h-full object-cover opacity-40"
+        src="/hero-bg.mp4"
+      ></video>
+      <div class="absolute inset-0 bg-gradient-to-b from-deep-void via-deep-void/60 to-deep-void"></div>
+      <!-- Subtle grid pattern -->
+      <div
+        class="absolute inset-0 z-0 opacity-[0.05]"
+        style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 40px 40px;"
+      ></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-16">
+      <div class="max-w-4xl">
+        <div class="inline-block mb-8 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-[10px] md:text-xs font-bold tracking-[0.2em] text-sovereign-white uppercase">
+          CONSULTORÍA EHS ESPECIALIZADA EN MÉXICO
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold font-heading leading-[1.1] mb-8 text-sovereign-white">
+          Excelencia en Seguridad Industrial y <span class="text-hazard-green block mt-4">Cumplimiento Normativo</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-muted-steel mb-12 max-w-2xl leading-relaxed font-medium">
+          Transformamos la gestión de riesgos en ventaja competitiva. Asegure la continuidad operativa y proteja a su equipo con consultoría estratégica especializada.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6">
+          <a href="https://wa.me/522224596850" target="_blank" class="btn-primary text-xl px-10 py-5 font-bold shadow-2xl shadow-hazard-green/20">
+            Solicitar Diagnóstico
+          </a>
+          <a href="/catalogo" class="inline-flex items-center justify-center px-10 py-5 border border-white/10 rounded-full text-xl font-bold text-sovereign-white hover:bg-white/5 transition-all backdrop-blur-sm">
+            Ver Catálogo NOMs
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Stats Bar -->
+  <StatsBar />
+
+  <!-- ADN Section -->
+  <ADNSection />
+
+  <!-- Technology Section -->
+  <TechnologySection />
+
   <!-- Service Pillars Section -->
-  <section id="pilares" class="catalog-section-divider">
+  <section id="pilares" class="py-32 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold font-heading mb-4">Los 3 Pilares de Blindaje Operativo</h2>
-        <p class="text-xl text-muted-steel max-w-2xl mx-auto">
-          Estructuramos el cumplimiento normativo como una armadura legal y técnica para tu empresa.
+      <div class="text-center mb-20">
+        <h4 class="text-hazard-green text-sm font-bold tracking-widest uppercase mb-4">COBERTURA INTEGRAL</h4>
+        <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 text-sovereign-white">Los 3 Pilares de Blindaje Operativo</h2>
+        <p class="text-xl text-muted-steel max-w-3xl mx-auto">
+          Estructuramos el cumplimiento normativo como una armadura legal y técnica para su empresa, eliminando la incertidumbre operativa.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Pillar 1 -->
-        <div class="adn-glass-card p-8 group">
-          <div class="h-12 w-12 rounded-lg bg-hazard-green/20 text-hazard-green flex items-center justify-center mb-6">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        <div class="adn-glass-card p-10 group">
+          <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
           </div>
-          <h3 class="text-2xl font-bold font-heading mb-4 group-hover:text-hazard-green transition-colors">Seguridad y Salud (STPS)</h3>
-          <p class="text-muted-steel mb-6 line-height-relaxed">
-            Protegemos a tu personal y evitamos multas millonarias por incumplimiento de las NOMs operativas. Implementación de NOM-030, NOM-019, NOM-035 y manejo de inspecciones federales.
+          <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Seguridad y Salud (STPS)</h3>
+          <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
+            Protegemos a su personal y evitamos sanciones millonarias mediante la implementación estratégica de NOM-030, NOM-019 y NOM-035.
           </p>
-          <a href="/catalogo#seguridad" class="text-hazard-green font-medium inline-flex items-center hover:underline">
-            Ver servicios STPS
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          <a href="/catalogo#seguridad" class="text-hazard-green font-bold inline-flex items-center group/link">
+            VER SERVICIOS STPS
+            <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </a>
         </div>
 
         <!-- Pillar 2 -->
-        <div class="adn-glass-card p-8 group">
-          <div class="h-12 w-12 rounded-lg bg-hazard-green/20 text-hazard-green flex items-center justify-center mb-6">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="adn-glass-card p-10 group">
+          <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           </div>
-          <h3 class="text-2xl font-bold font-heading mb-4 group-hover:text-hazard-green transition-colors">Medio Ambiente</h3>
-          <p class="text-muted-steel mb-6 line-height-relaxed">
-            Aseguramos que tu operación industrial cumpla con SEMARNAT, PROFEPA y regulaciones estatales. Trámites COA, MIA, LAU, manejo de residuos peligrosos y emisiones.
+          <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Medio Ambiente</h3>
+          <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
+            Gestión ambiental experta para cumplimiento total con SEMARNAT y PROFEPA. Trámites COA, MIA y manejo de residuos peligrosos.
           </p>
-          <a href="/catalogo#medio-ambiente" class="text-hazard-green font-medium inline-flex items-center hover:underline">
-            Ver servicios Medio Ambiente
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          <a href="/catalogo#medio-ambiente" class="text-hazard-green font-bold inline-flex items-center group/link">
+            VER SERVICIOS AMBIENTALES
+            <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </a>
         </div>
 
         <!-- Pillar 3 -->
-        <div class="adn-glass-card p-8 group">
-          <div class="h-12 w-12 rounded-lg bg-hazard-green/20 text-hazard-green flex items-center justify-center mb-6">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <div class="adn-glass-card p-10 group">
+          <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
           </div>
-          <h3 class="text-2xl font-bold font-heading mb-4 group-hover:text-hazard-green transition-colors">Sistemas de Gestión</h3>
-          <p class="text-muted-steel mb-6 line-height-relaxed">
-            Elevamos la madurez operativa de tu planta mediante ISO 14001, ISO 45001 y auditorías PASST. Transforma el cumplimiento en una ventaja competitiva sistemática.
+          <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Sistemas de Gestión</h3>
+          <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
+            Certificación en ISO 14001 e ISO 45001. Transformamos el cumplimiento en eficiencia sistemática y competitividad global.
           </p>
-          <a href="/catalogo#sistemas" class="text-hazard-green font-medium inline-flex items-center hover:underline">
-            Ver servicios de Gestión
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          <a href="/catalogo#sistemas" class="text-hazard-green font-bold inline-flex items-center group/link">
+            VER SISTEMAS DE GESTIÓN
+            <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Brand Resources / CTA Section -->
-  <section class="catalog-section-divider relative">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Compliance Calculator -->
+  <ComplianceCalculator />
+
+  <!-- Gallery Section -->
+  <GallerySection />
+
+  <!-- Final CTA Section -->
+  <section class="py-32 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="adn-animated-border">
-        <div class="bg-charcoal-surface rounded-xl p-10 md:p-16 text-center">
-          <h2 class="text-3xl md:text-5xl font-bold font-heading mb-6">
-            Si buscas un trámite rápido de simulación, no somos tu opción.
+        <div class="bg-charcoal-surface rounded-3xl p-10 md:p-20 text-center relative overflow-hidden">
+          <!-- Subtle glow -->
+          <div class="absolute -top-24 -left-24 w-64 h-64 bg-hazard-green/10 rounded-full blur-[80px]"></div>
+          
+          <h2 class="text-3xl md:text-5xl font-bold font-heading mb-8 text-sovereign-white leading-tight">
+            ¿Busca un trámite rápido o <span class="text-hazard-green">blindaje real</span> para su planta?
           </h2>
-          <p class="text-xl text-muted-steel mb-10 max-w-2xl mx-auto">
-            Si buscas blindaje real y cumplimiento normativo absoluto para tu planta industrial en México, entonces tenemos que hablar.
+          <p class="text-xl text-muted-steel mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+            En Vértice EHS no simulamos el cumplimiento. Proporcionamos la autoridad técnica y el respaldo legal que su operación industrial exige en México.
           </p>
-          <div class="flex flex-col gap-4">
-            <span class="text-sm font-bold uppercase tracking-widest text-hazard-green">
-              VE NUESTROS ESTUDIOS Y CAPACITACIONES AQUÍ:
+          <div class="flex flex-col items-center gap-6">
+            <span class="text-xs font-black uppercase tracking-[0.4em] text-hazard-green opacity-70">
+              AGENDE UNA CONSULTA ESTRATÉGICA
             </span>
-            <a href="/catalogo" class="btn-primary text-xl px-10 py-5 mx-auto">
-              Acceder al Catálogo de NOMs
+            <a href="https://wa.me/522224596850" target="_blank" class="btn-primary text-2xl px-12 py-6 font-bold">
+              Hablar con un Especialista
             </a>
           </div>
         </div>

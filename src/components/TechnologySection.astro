@@ -1,0 +1,84 @@
+---
+const features = [
+  {
+    title: 'Automatización de Cumplimiento Legal',
+    tag: 'Digital',
+    color: '#00d68f',
+    desc: 'Digitalizamos tus matrices de requisitos legales. Si un inspector pide tu cumplimiento de la NOM-035 o tu estudio ergonómico de la NOM-036-1, lo tienes a un clic de distancia, encriptado, blindado y 100% auditable.',
+    highlight: '100% auditable',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+  },
+  {
+    title: 'Inteligencia Artificial Preventiva',
+    tag: 'IA',
+    color: '#00b4d8',
+    desc: 'Pasamos de la reacción a la predicción. Aplicamos IA para analizar patrones de incidentes y optimizar tu IPERC. Neutralizamos la falla técnica o humana antes de que ocurra el accidente, protegiendo las vidas de tu equipo.',
+    highlight: 'Predicción proactiva',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.989-2.386l-.548-.547z"></path></svg>`
+  },
+  {
+    title: 'Seguimiento de Ciclo Completo',
+    tag: 'Cero Abandono',
+    color: '#C084FC',
+    desc: 'No entregamos un diagnóstico para luego desaparecer. Establecemos KPIs duros, medimos el cierre de brechas operativas y calibramos los controles en campo hasta que el riesgo está fulminado de raíz.',
+    highlight: 'KPIs duros',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`
+  },
+];
+---
+
+<section id="tecnologia" class="py-32 relative overflow-hidden">
+  <!-- Glow Effect -->
+  <div class="absolute bottom-0 right-0 w-[600px] h-[400px] bg-hazard-green/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="flex items-center gap-3 mb-8">
+      <div class="w-12 h-[2px] bg-hazard-green"></div>
+      <span class="text-xs font-bold tracking-[0.4em] text-muted-steel uppercase">Tecnología EHS 4.0</span>
+    </div>
+
+    <h2 class="text-4xl md:text-6xl font-bold font-heading text-sovereign-white leading-tight mb-8">
+      La gestión EHS en hojas de cálculo <span class="text-hazard-green italic font-light">está muerta.</span>
+    </h2>
+
+    <p class="text-xl text-muted-steel mb-20 max-w-2xl leading-relaxed">
+      Proporcionamos una ventaja estratégica mediante tecnología de vanguardia. Tres pilares que transforman su operación de la reacción a la prevención absoluta.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {features.map((feat) => (
+        <div class="adn-animated-border group">
+          <div class="adn-glass-card p-10 h-full flex flex-col">
+            <div class="flex items-start justify-between mb-8">
+              <div 
+                class="w-14 h-14 rounded-2xl flex items-center justify-center border border-white/5"
+                style={`background-color: ${feat.color}15; color: ${feat.color};`}
+                set:html={feat.icon}
+              />
+              <span 
+                class="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full border"
+                style={`color: ${feat.color}; background-color: ${feat.color}10; border-color: ${feat.color}30;`}
+              >
+                {feat.tag}
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-bold font-heading text-sovereign-white mb-6 group-hover:text-hazard-green transition-colors">
+              {feat.title}
+            </h3>
+
+            <p class="text-muted-steel leading-relaxed mb-8 flex-grow">
+              {feat.desc}
+            </p>
+
+            <div class="pt-6 border-t border-white/5">
+              <span class="text-xs font-black uppercase tracking-[0.2em]" style={`color: ${feat.color}`}>
+                → {feat.highlight}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -73,48 +73,60 @@ import GallerySection from '../components/GallerySection.astro';
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Pillar 1 -->
-        <div class="adn-glass-card p-10 group">
-          <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        <div class="adn-glass-card p-10 group relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-logo-blue opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-logo-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          <div class="relative z-10">
+            <div class="h-16 w-16 rounded-2xl bg-logo-blue/10 text-logo-blue flex items-center justify-center mb-8 border border-logo-blue/20 group-hover:bg-logo-blue/20 transition-all">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-logo-blue transition-colors">Seguridad y Salud (STPS)</h3>
+            <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
+              Protegemos a su personal y evitamos sanciones millonarias mediante la implementación estratégica de NOM-030, NOM-019 y NOM-035.
+            </p>
+            <a href="/catalogo#seguridad" class="text-logo-blue font-bold inline-flex items-center group/link">
+              VER SERVICIOS STPS
+              <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
           </div>
-          <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Seguridad y Salud (STPS)</h3>
-          <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
-            Protegemos a su personal y evitamos sanciones millonarias mediante la implementación estratégica de NOM-030, NOM-019 y NOM-035.
-          </p>
-          <a href="/catalogo#seguridad" class="text-hazard-green font-bold inline-flex items-center group/link">
-            VER SERVICIOS STPS
-            <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-          </a>
         </div>
 
         <!-- Pillar 2 -->
-        <div class="adn-glass-card p-10 group">
-          <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="adn-glass-card p-10 group relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-hazard-green opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-hazard-green/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          <div class="relative z-10">
+            <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Medio Ambiente</h3>
+            <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
+              Gestión ambiental experta para cumplimiento total con SEMARNAT y PROFEPA. Trámites COA, MIA y manejo de residuos peligrosos.
+            </p>
+            <a href="/catalogo#medio-ambiente" class="text-hazard-green font-bold inline-flex items-center group/link">
+              VER SERVICIOS AMBIENTALES
+              <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
           </div>
-          <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Medio Ambiente</h3>
-          <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
-            Gestión ambiental experta para cumplimiento total con SEMARNAT y PROFEPA. Trámites COA, MIA y manejo de residuos peligrosos.
-          </p>
-          <a href="/catalogo#medio-ambiente" class="text-hazard-green font-bold inline-flex items-center group/link">
-            VER SERVICIOS AMBIENTALES
-            <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-          </a>
         </div>
 
         <!-- Pillar 3 -->
-        <div class="adn-glass-card p-10 group">
-          <div class="h-16 w-16 rounded-2xl bg-hazard-green/10 text-hazard-green flex items-center justify-center mb-8 border border-hazard-green/20 group-hover:bg-hazard-green/20 transition-all">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <div class="adn-glass-card p-10 group relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-amber-gold opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-amber-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          <div class="relative z-10">
+            <div class="h-16 w-16 rounded-2xl bg-amber-gold/10 text-amber-gold flex items-center justify-center mb-8 border border-amber-gold/20 group-hover:bg-amber-gold/20 transition-all">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-amber-gold transition-colors">Sistemas de Gestión</h3>
+            <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
+              Certificación en ISO 14001 e ISO 45001. Transformamos el cumplimiento en eficiencia sistemática y competitividad global.
+            </p>
+            <a href="/catalogo#sistemas" class="text-amber-gold font-bold inline-flex items-center group/link">
+              VER SISTEMAS DE GESTIÓN
+              <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
           </div>
-          <h3 class="text-2xl font-bold font-heading mb-4 text-sovereign-white group-hover:text-hazard-green transition-colors">Sistemas de Gestión</h3>
-          <p class="text-muted-steel mb-8 text-lg leading-relaxed font-medium">
-            Certificación en ISO 14001 e ISO 45001. Transformamos el cumplimiento en eficiencia sistemática y competitividad global.
-          </p>
-          <a href="/catalogo#sistemas" class="text-hazard-green font-bold inline-flex items-center group/link">
-            VER SISTEMAS DE GESTIÓN
-            <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-          </a>
         </div>
       </div>
     </div>

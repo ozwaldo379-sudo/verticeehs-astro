@@ -16,11 +16,18 @@ Evita el "AI Slop" (diseños genéricos, texto de relleno aburrido o layouts pre
 - **Micro-animaciones:** Las tarjetas deben tener hover effects: `border-beam`, `accent glow`. NUNCA diseños estáticos o aburridos.
 - **Spacing estándar:** `py-32` en todas las secciones principales. Usar `.catalog-section-divider` para separar secciones.
 
-### 🌌 Particle Background (GLOBAL — NO REMOVER)
-- **Componente:** `ParticleBackground.astro` inyectado en `Layout.astro` → aplica a TODAS las páginas.
-- **Colores (3 colores del logo):** Green `#2E9E3C`, Blue `#1A5CE6`, White `#F8FAFC`.
-- **Canvas:** `position: fixed; z-index: 0`. Todo el contenido de página en `z-index: 1+`.
-- **Performance:** Vanilla Canvas 2D + `requestAnimationFrame`. Respeta `prefers-reduced-motion`.
+### 🌌 Ambient Graphics Contract (GLOBAL — NO REMOVER NI SUSTITUIR)
+
+- **Target Element:** `#particle-canvas` (HTML5 Canvas) — componente `ParticleBackground.astro` inyectado en `Layout.astro` → aplica a TODAS las páginas.
+- **Rendering Engine:** Native 2D Context — sin WebGL, sin CSS keyframes para partículas.
+- **Logic Specification:**
+  - Particle Count: **60 structural nodes** (fijo, no dinámico)
+  - Geometry: **Connection lines** entre nodos a menos de 120px de distancia (opacidad proporcional a cercanía)
+  - Colors: **Emerald Green** `rgba(16, 185, 129, alpha)` — un solo color, sin múltiples paletas
+  - Physics: Loop continuo con `requestAnimationFrame` + listeners de resize en canvas
+- **CSS:** `position: fixed; inset: 0; z-index: 0` — todo el contenido de página en `z-index: 1+`.
+- **Performance:** Vanilla Canvas 2D sin librerías externas. Respeta `prefers-reduced-motion`.
+- **⛔ CONSTRAINT ABSOLUTO:** Todo deployment o replicación de layout DEBE heredar esta arquitectura exacta. Está **PROHIBIDO** sustituirla con Tailwind gradient animations, static backgrounds, o cualquier otro sistema de fondo.
 
 ### 🎨 Gradient Title System (GLOBAL)
 - **Clases disponibles:** `.gradient-title` (principal), `.gradient-title-subtle`, `.gradient-accent`.

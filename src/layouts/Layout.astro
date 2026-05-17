@@ -70,8 +70,10 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="h-20 flex items-center justify-between">
           <div class="flex-shrink-0">
-            <a href="/" class="group flex items-center gap-2">
-              <span class="text-2xl font-extrabold font-heading tracking-tighter text-sovereign-white group-hover:text-hazard-green transition-colors">
+            <a href="/" class="group flex items-center gap-3">
+              <!-- Reemplaza /logo.png con el nombre real de tu archivo si es diferente (.svg, .webp) -->
+              <img src="/logo.png" alt="Vértice EHS Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="text-2xl font-extrabold font-heading tracking-tighter text-sovereign-white group-hover:text-hazard-green transition-colors hidden" style="display: none;">
                 VÉRTICE<span class="text-hazard-green group-hover:text-sovereign-white">.</span>EHS
               </span>
             </a>
@@ -107,9 +109,12 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-24">
           <div class="col-span-1 md:col-span-2">
-            <span class="text-3xl font-black font-heading text-sovereign-white tracking-tighter">
-              VÉRTICE<span class="text-hazard-green">.</span>EHS
-            </span>
+            <div class="flex items-center gap-3">
+              <img src="/logo.png" alt="Vértice EHS Logo" class="h-12 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="text-3xl font-black font-heading text-sovereign-white tracking-tighter hidden" style="display: none;">
+                VÉRTICE<span class="text-hazard-green">.</span>EHS
+              </span>
+            </div>
             <p class="mt-8 text-xl text-muted-steel leading-relaxed max-w-md">
               Ingeniería estratégica en cumplimiento normativo y blindaje industrial para el mercado mexicano.
             </p>

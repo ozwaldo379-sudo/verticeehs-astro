@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VÉRTICE EHS | Soberanía Técnica</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#002204",
+                      "surface-container-high": "#272a2f",
+                      "sovereign-white": "#F8FAFC",
+                      "on-secondary-fixed": "#400200",
+                      "on-tertiary-container": "#00246a",
+                      "secondary": "#ffb4a6",
+                      "surface-container-highest": "#32353a",
+                      "muted-steel": "#94A3B8",
+                      "surface-dim": "#101418",
+                      "primary-fixed": "#8cfb8c",
+                      "tertiary-fixed-dim": "#b4c5ff",
+                      "secondary-fixed": "#ffdad4",
+                      "secondary-fixed-dim": "#ffb4a6",
+                      "on-secondary-container": "#ff9f8e",
+                      "surface-tint": "#70de72",
+                      "on-surface-variant": "#becab8",
+                      "charcoal-surface": "#0A0E14",
+                      "on-tertiary-fixed": "#00174b",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#70de72",
+                      "inverse-surface": "#e0e2e8",
+                      "on-surface": "#e0e2e8",
+                      "primary-container": "#36a542",
+                      "secondary-container": "#8b2213",
+                      "logo-blue": "#1A5CE6",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#872011",
+                      "on-background": "#e0e2e8",
+                      "inverse-primary": "#006e1e",
+                      "outline-variant": "#3f4a3c",
+                      "surface": "#101418",
+                      "on-error": "#690005",
+                      "surface-bright": "#36393e",
+                      "on-primary-fixed-variant": "#005314",
+                      "tertiary-container": "#628aff",
+                      "background": "#101418",
+                      "surface-variant": "#32353a",
+                      "deep-void": "#030508",
+                      "hazard-green": "#2E9E3C",
+                      "on-primary-container": "#003208",
+                      "on-tertiary": "#002979",
+                      "on-primary": "#00390b",
+                      "on-tertiary-fixed-variant": "#003da9",
+                      "surface-container-low": "#191c20",
+                      "surface-container": "#1d2024",
+                      "on-error-container": "#ffdad6",
+                      "outline": "#889484",
+                      "on-secondary": "#670600",
+                      "primary": "#70de72",
+                      "inverse-on-surface": "#2d3135",
+                      "surface-container-lowest": "#0b0e13",
+                      "tertiary-fixed": "#dbe1ff",
+                      "alert-orange": "#E86650",
+                      "tertiary": "#b4c5ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "8rem",
+                      "container-padding": "2rem",
+                      "gutter": "1.5rem",
+                      "bento-gap": "1rem"
+              },
+              "fontFamily": {
+                      "headline-md": ["Manrope"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Manrope"],
+                      "headline-xl": ["Manrope"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #030508;
+            color: #e0e2e8;
+            overflow-x: hidden;
+        }
+        .glass-adn {
+            background-color: rgba(10, 14, 20, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.05);
+        }
+        .glow-button {
+            box-shadow: 0 0 15px rgba(46, 158, 60, 0.4);
+        }
+        .animated-border {
+            position: relative;
+        }
+        .animated-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: conic-gradient(from 0deg, transparent, #2E9E3C, transparent);
+            z-index: -1;
+            animation: rotate-border 4s linear infinite;
+        }
+        @keyframes rotate-border {
+            100% { transform: rotate(360deg); }
+        }
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="antialiased relative min-h-screen">
+<!-- Particle Canvas Background -->
+<canvas class="fixed inset-0 z-0 pointer-events-none w-full h-full" id="particle-canvas"></canvas>
+<!-- Content Wrapper (z-index above canvas) -->
+<div class="relative z-10">
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-deep-void/75 backdrop-blur-xl bg-transparent shadow-none">
+<div class="flex justify-between items-center px-container-padding py-6 max-w-full">
+<div class="font-headline-md text-headline-md font-black tracking-tighter text-on-surface">VÉRTICE EHS</div>
+<div class="hidden md:flex space-x-8">
+<a class="text-hazard-green border-b-2 border-hazard-green pb-1 font-headline-md text-headline-md font-bold text-sm" href="#">Manifiesto</a>
+<a class="text-muted-steel hover:text-on-surface transition-colors duration-300 font-headline-md text-headline-md font-bold text-sm hover:text-primary transition-all duration-200" href="#">Capacitación</a>
+<a class="text-muted-steel hover:text-on-surface transition-colors duration-300 font-headline-md text-headline-md font-bold text-sm hover:text-primary transition-all duration-200" href="#">Servicios</a>
+<a class="text-muted-steel hover:text-on-surface transition-colors duration-300 font-headline-md text-headline-md font-bold text-sm hover:text-primary transition-all duration-200" href="#">Certificaciones</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="bg-hazard-green text-on-primary-fixed font-label-sm text-label-sm px-4 py-2 rounded-full glow-button scale-95 active:scale-90 transition-transform hidden sm:block">OPERATIVO SENIOR</button>
+<button class="text-hazard-green hover:text-primary transition-all duration-200 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar Component -->
+<nav class="fixed right-8 top-1/2 -translate-y-1/2 z-40 bg-transparent no-border flat no shadows hidden lg:flex flex-col items-center space-y-6">
+<div class="flex flex-col gap-6 items-center">
+<div class="relative group cursor-pointer hover:scale-125 transition-all duration-300 flex items-center justify-center">
+<div class="bg-hazard-green shadow-[0_0_15px_rgba(46,158,60,0.6)] w-3 h-3 rounded-full transition-all duration-500 absolute"></div>
+<span class="material-symbols-outlined text-hazard-green opacity-0 group-hover:opacity-100 absolute left-6" data-icon="radio_button_checked">radio_button_checked</span>
+</div>
+<div class="relative group cursor-pointer hover:scale-125 transition-all duration-300 flex items-center justify-center">
+<div class="bg-muted-steel/30 w-2 h-2 rounded-full hover:bg-muted-steel transition-all duration-300 absolute"></div>
+<span class="material-symbols-outlined text-muted-steel opacity-0 group-hover:opacity-100 absolute left-6" data-icon="description">description</span>
+</div>
+<div class="relative group cursor-pointer hover:scale-125 transition-all duration-300 flex items-center justify-center">
+<div class="bg-muted-steel/30 w-2 h-2 rounded-full hover:bg-muted-steel transition-all duration-300 absolute"></div>
+<span class="material-symbols-outlined text-muted-steel opacity-0 group-hover:opacity-100 absolute left-6" data-icon="grid_view">grid_view</span>
+</div>
+<div class="relative group cursor-pointer hover:scale-125 transition-all duration-300 flex items-center justify-center">
+<div class="bg-muted-steel/30 w-2 h-2 rounded-full hover:bg-muted-steel transition-all duration-300 absolute"></div>
+<span class="material-symbols-outlined text-muted-steel opacity-0 group-hover:opacity-100 absolute left-6" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="relative group cursor-pointer hover:scale-125 transition-all duration-300 flex items-center justify-center">
+<div class="bg-muted-steel/30 w-2 h-2 rounded-full hover:bg-muted-steel transition-all duration-300 absolute"></div>
+<span class="material-symbols-outlined text-muted-steel opacity-0 group-hover:opacity-100 absolute left-6" data-icon="terminal">terminal</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-[120px] pb-section-gap px-container-padding max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="min-h-[819px] flex flex-col justify-center items-start mb-section-gap relative">
+<div class="glass-adn p-12 rounded-2xl w-full max-w-4xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-500">
+<div class="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-9xl text-hazard-green filled-icon" data-icon="policy">policy</span>
+</div>
+<div class="relative z-10">
+<span class="font-label-sm text-label-sm text-hazard-green uppercase tracking-widest mb-4 block">Soberanía Técnica Activa</span>
+<h1 class="font-headline-xl text-headline-xl text-sovereign-white mb-6">El Riesgo es una Variable. <br/><span class="text-hazard-green">Nosotros somos la Constante.</span></h1>
+<p class="font-body-lg text-body-lg text-muted-steel max-w-2xl mb-10">
+                            {{DATA:DOCUMENT:DOCUMENT_2}}
+                        </p>
+<div class="flex gap-6">
+<button class="bg-hazard-green text-on-primary-fixed font-label-sm text-label-sm px-8 py-4 rounded-full glow-button hover:bg-primary-fixed transition-colors flex items-center gap-2">
+                                INCIA DIAGNÓSTICO
+                                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="border border-muted-steel/30 text-sovereign-white font-label-sm text-label-sm px-8 py-4 rounded-full hover:bg-surface-variant transition-colors">
+                                VER MANIFIESTO
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Manifiesto Section -->
+<section class="mb-section-gap">
+<div class="flex items-end mb-12 border-b border-muted-steel/10 pb-6">
+<h2 class="font-headline-lg text-headline-lg text-sovereign-white">Manifiesto <span class="text-muted-steel">Operativo</span></h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-bento-gap">
+<!-- Bento Box 1 -->
+<div class="glass-adn p-8 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+<span class="material-symbols-outlined text-hazard-green text-4xl mb-6 block" data-icon="health_and_safety">health_and_safety</span>
+<h3 class="font-headline-md text-headline-md text-sovereign-white text-xl mb-4">Cero Tolerancia</h3>
+<p class="font-body-md text-body-md text-muted-steel">Implementamos protocolos inquebrantables. No negociamos con la seguridad de la fuerza laboral. Cada normativa es un mandato técnico absoluto.</p>
+</div>
+<!-- Bento Box 2 -->
+<div class="glass-adn p-8 rounded-xl hover:-translate-y-1 transition-transform duration-300 animated-border">
+<span class="material-symbols-outlined text-alert-orange text-4xl mb-6 block" data-icon="warning">warning</span>
+<h3 class="font-headline-md text-headline-md text-sovereign-white text-xl mb-4">Respuesta Crítica</h3>
+<p class="font-body-md text-body-md text-muted-steel">Capacidad de despliegue inmediato ante contingencias EHS. Analítica forense y mitigación de daños en tiempo real.</p>
+</div>
+<!-- Bento Box 3 -->
+<div class="glass-adn p-8 rounded-xl hover:-translate-y-1 transition-transform duration-300 md:col-span-2 lg:col-span-1">
+<span class="material-symbols-outlined text-logo-blue text-4xl mb-6 block" data-icon="architecture">architecture</span>
+<h3 class="font-headline-md text-headline-md text-sovereign-white text-xl mb-4">Arquitectura Normativa</h3>
+<p class="font-body-md text-body-md text-muted-steel">Estructuramos el cumplimiento corporativo desde los cimientos. Cumplimiento auditado y trazable.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full mt-section-gap bg-deep-void border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding py-12 max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md text-on-surface mb-6 md:mb-0">VÉRTICE EHS</div>
+<div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
+<a class="font-body-md text-body-md text-muted-steel hover:text-on-surface transition-colors opacity-80 hover:opacity-100 transition-opacity text-sm" href="#">Protocolos NOM</a>
+<a class="font-body-md text-body-md text-muted-steel hover:text-on-surface transition-colors opacity-80 hover:opacity-100 transition-opacity text-sm" href="#">Aviso de Privacidad</a>
+<a class="font-body-md text-body-md text-muted-steel hover:text-on-surface transition-colors opacity-80 hover:opacity-100 transition-opacity text-sm" href="#">Terminal de Comando</a>
+<a class="font-body-md text-body-md text-muted-steel hover:text-on-surface transition-colors opacity-80 hover:opacity-100 transition-opacity text-sm" href="#">Soporte Forense</a>
+</div>
+<div class="font-body-md text-body-md text-muted-steel text-xs text-center md:text-right">
+                    © 2024 VÉRTICE EHS. SOBERANÍA TÉCNICA EN SEGURIDAD INDUSTRIAL.
+                </div>
+</div>
+</footer>
+</div>
+<script>
+        // Particle System Implementation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particles = [];
+        const numParticles = 100;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.36; // Ultra-low speeds (±0.18px/frame * 2 approx for better spread)
+                this.vy = (Math.random() - 0.5) * 0.36;
+                this.radius = Math.random() * 1.4 + 0.8; // 0.8px to 2.2px
+                
+                const colors = ['rgba(46, 158, 60, 0.3)', 'rgba(26, 92, 230, 0.3)', 'rgba(248, 250, 252, 0.3)']; // Green, Blue, White with 0.3 opacity
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                // Draw connections
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(148, 163, 184, 0.04)`; // Opacidad de conexiones: 0.04
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body></html>

@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// This is the main Client Portal entry page
+---
+
+<Layout 
+  title="Portal de Clientes | Vértice EHS" 
+  description="Accede a tus cotizaciones, estudios y expedientes legales en tu entorno seguro de Vértice EHS."
+>
+  <div class="min-h-screen relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center pt-24 text-slate-800 dark:text-sovereign-white">
+    
+    <!-- Floating Triangles for the "blue part" style requested by user -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-40 dark:opacity-30">
+      <svg class="absolute top-20 left-10 w-24 h-24 text-logo-blue/30 dark:text-logo-blue animate-[spin_20s_linear_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
+      </svg>
+      <svg class="absolute bottom-40 right-20 w-32 h-32 text-logo-blue/20 dark:text-logo-blue animate-[spin_30s_linear_infinite_reverse]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+        <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
+      </svg>
+      <svg class="absolute top-1/2 left-2/3 w-16 h-16 text-hazard-green/30 dark:text-hazard-green animate-[spin_15s_linear_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <!-- Ambient Glow (Subtle) -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full blur-[120px] animate-pulse" style="background-color: rgba(10, 102, 184, 0.08); animation-duration: 8s;"></div>
+      <div class="absolute bottom-20 -left-40 w-[500px] h-[500px] rounded-full blur-[100px] animate-pulse" style="background-color: rgba(15, 143, 69, 0.05); animation-duration: 10s; animation-delay: 2s;"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-5xl mx-auto space-y-12">
+      
+      {/* Header Section */}
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-4 backdrop-blur-md bg-white/60 dark:bg-white/5 border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
+          <span class="w-2 h-2 rounded-full animate-pulse bg-hazard-green shadow-[0_0_8px_rgba(15,143,69,0.8)]"></span>
+          <span class="text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-sovereign-white">Portal Exclusivo</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-heading leading-[1.1] text-slate-900 dark:text-white">
+          Tu ecosistema de <br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-hazard-green to-logo-blue">Seguridad y Salud</span>
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto text-slate-600 dark:text-muted-steel font-medium">
+          Accede a tus estudios normativos, audita tu expediente legal y revisa cotizaciones de forma rápida y segura, respaldado por Vértice EHS.
+        </p>
+      </div>
+      
+      {/* Grid de Herramientas (3D Cards) */}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8 perspective-1000" style="perspective: 1000px;">
+        
+        {/* Card 1: Cotizaciones */}
+        <a href="/clientes/cotizaciones" class="group relative flex flex-col p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-xl shadow-slate-200/50 dark:shadow-none backdrop-blur-xl transition-all duration-500 hover:z-20" style="transform-style: preserve-3d; transition: transform 0.4s ease, box-shadow 0.4s ease;" onmouseover="this.style.transform='rotateX(5deg) rotateY(-5deg) translateZ(20px)'; this.style.boxShadow='-20px 20px 40px rgba(10, 102, 184, 0.15), 0 0 20px rgba(15, 143, 69, 0.1)';" onmouseout="this.style.transform='rotateX(0) rotateY(0) translateZ(0)'; this.style.boxShadow='0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';">
+          <div class="absolute inset-0 bg-gradient-to-br from-white/50 dark:from-white/5 to-transparent rounded-3xl pointer-events-none"></div>
+          
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 shadow-lg bg-gradient-to-br from-logo-blue/10 dark:from-logo-blue/20 to-transparent border border-logo-blue/20 dark:border-logo-blue/30" style="transform: translateZ(30px);">
+            <svg class="w-8 h-8 text-logo-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 font-heading text-slate-900 dark:text-sovereign-white" style="transform: translateZ(20px);">Cotizaciones</h3>
+          <p class="text-sm flex-grow mb-6 text-slate-600 dark:text-muted-steel" style="transform: translateZ(10px);">Revisa, descarga y aprueba tus propuestas de servicio mediante tu folio asignado.</p>
+          <div class="flex items-center gap-2 text-sm font-bold transition-colors text-logo-blue" style="transform: translateZ(20px);">
+            Acceder <span class="transform transition-transform group-hover:translate-x-2">→</span>
+          </div>
+        </a>
+
+        {/* Card 2: Estudios STPS */}
+        <div class="group relative flex flex-col p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-xl shadow-slate-200/50 dark:shadow-none backdrop-blur-xl transition-all duration-500 cursor-pointer hover:z-20" style="transform-style: preserve-3d; transition: transform 0.4s ease, box-shadow 0.4s ease;" onclick="alert('Funcionalidad en construcción. Se vinculará con Google Drive.')" onmouseover="this.style.transform='rotateX(5deg) rotateY(0deg) translateZ(20px)'; this.style.boxShadow='0 25px 50px rgba(15, 143, 69, 0.15)';" onmouseout="this.style.transform='rotateX(0) rotateY(0) translateZ(0)'; this.style.boxShadow='0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';">
+          <div class="absolute inset-0 bg-gradient-to-br from-white/50 dark:from-white/5 to-transparent rounded-3xl pointer-events-none"></div>
+
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 shadow-lg bg-gradient-to-br from-hazard-green/10 dark:from-hazard-green/20 to-transparent border border-hazard-green/20 dark:border-hazard-green/30" style="transform: translateZ(30px);">
+            <svg class="w-8 h-8 text-hazard-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 font-heading text-slate-900 dark:text-sovereign-white" style="transform: translateZ(20px);">Estudios STPS</h3>
+          <p class="text-sm flex-grow mb-6 text-slate-600 dark:text-muted-steel" style="transform: translateZ(10px);">Consulta informes, resultados de evaluaciones de agentes químicos y normas de la STPS.</p>
+          <div class="flex items-center gap-2 text-sm font-bold transition-colors text-hazard-green" style="transform: translateZ(20px);">
+            Ingresar Folio <span class="transform transition-transform group-hover:translate-x-2">→</span>
+          </div>
+        </div>
+
+        {/* Card 3: Expediente Legal */}
+        <div class="group relative flex flex-col p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-xl shadow-slate-200/50 dark:shadow-none backdrop-blur-xl transition-all duration-500 cursor-pointer hover:z-20" style="transform-style: preserve-3d; transition: transform 0.4s ease, box-shadow 0.4s ease;" onclick="alert('Funcionalidad en construcción. Se vinculará con Google Drive.')" onmouseover="this.style.transform='rotateX(5deg) rotateY(5deg) translateZ(20px)'; this.style.boxShadow='20px 20px 40px rgba(0, 0, 0, 0.05), 0 0 20px rgba(10, 102, 184, 0.1)';" onmouseout="this.style.transform='rotateX(0) rotateY(0) translateZ(0)'; this.style.boxShadow='0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';">
+          <div class="absolute inset-0 bg-gradient-to-br from-white/50 dark:from-white/5 to-transparent rounded-3xl pointer-events-none"></div>
+
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 shadow-lg bg-gradient-to-br from-slate-100 dark:from-white/10 to-transparent border border-slate-200 dark:border-white/20" style="transform: translateZ(30px);">
+            <svg class="w-8 h-8 text-slate-800 dark:text-sovereign-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-3.5" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 font-heading text-slate-900 dark:text-sovereign-white" style="transform: translateZ(20px);">Expediente Legal</h3>
+          <p class="text-sm flex-grow mb-6 text-slate-600 dark:text-muted-steel" style="transform: translateZ(10px);">Tus evidencias, auditorías y certificaciones organizadas y siempre disponibles.</p>
+          <div class="flex items-center gap-2 text-sm font-bold transition-colors text-slate-800 dark:text-sovereign-white" style="transform: translateZ(20px);">
+            Acceso Corporativo <span class="transform transition-transform group-hover:translate-x-2">→</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Trust/Value Section */}
+      <div class="mt-16 p-10 rounded-[2.5rem] relative overflow-hidden bg-gradient-to-br from-slate-100 to-white dark:from-logo-blue/20 dark:to-deep-void border border-slate-200 dark:border-logo-blue/20 shadow-xl shadow-slate-200/50 dark:shadow-[0_20px_40px_rgba(10,102,184,0.15)]">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-logo-blue/5 dark:bg-logo-blue/10 rounded-full blur-[80px]"></div>
+        <div class="absolute bottom-0 left-0 w-40 h-40 bg-hazard-green/5 dark:bg-hazard-green/10 rounded-full blur-[60px]"></div>
+        
+        {/* More Triangles for the blue section */}
+        <svg class="absolute top-10 right-10 w-16 h-16 text-logo-blue/20 dark:text-logo-blue/40 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
+        </svg>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+          <div class="md:w-2/3 space-y-4">
+            <h3 class="text-2xl font-bold font-heading text-slate-900 dark:text-sovereign-white">Seguridad, Trazabilidad y Confianza</h3>
+            <p class="text-slate-600 dark:text-muted-steel text-sm md:text-base leading-relaxed font-medium">
+              En Vértice EHS entendemos que tu información es el activo más importante. Nuestro ecosistema utiliza infraestructura en la nube empresarial (Google Workspace) para garantizar que tus expedientes y resultados estén siempre disponibles con la máxima encriptación.
+            </p>
+          </div>
+          <div class="md:w-1/3 flex justify-center md:justify-end">
+            <div class="flex -space-x-4">
+              <div class="w-16 h-16 rounded-full border-4 border-white dark:border-deep-void flex items-center justify-center bg-slate-100/50 dark:bg-white/10 backdrop-blur-md shadow-lg">
+                <svg class="w-6 h-6 text-slate-800 dark:text-sovereign-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              </div>
+              <div class="w-16 h-16 rounded-full border-4 border-white dark:border-deep-void flex items-center justify-center bg-slate-100/50 dark:bg-white/10 backdrop-blur-md shadow-lg">
+                <svg class="w-6 h-6 text-hazard-green" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</Layout>

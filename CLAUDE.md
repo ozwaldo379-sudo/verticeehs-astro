@@ -21,9 +21,9 @@ Evita el "AI Slop" (diseños genéricos, texto de relleno aburrido o layouts pre
 - **Target Element:** `#particle-canvas` (HTML5 Canvas) — componente `ParticleBackground.astro` inyectado en `Layout.astro` → aplica a TODAS las páginas.
 - **Rendering Engine:** Native 2D Context — sin WebGL, sin CSS keyframes para partículas.
 - **Logic Specification:**
-  - Particle Count: **60 structural nodes** (fijo, no dinámico)
-  - Geometry: **Connection lines** entre nodos a menos de 120px de distancia (opacidad proporcional a cercanía)
-  - Colors: **Emerald Green** `rgba(16, 185, 129, alpha)` — un solo color, sin múltiples paletas
+  - Particle Count: **280 partículas** (0 si `prefers-reduced-motion`)
+  - Geometry: **Connection lines** entre nodos cercanos (opacidad proporcional a cercanía, trazo `rgba(148,163,184,alpha)`)
+  - Colors: **Tricolor del logo** — Hazard Green `rgba(46,158,60,0.55)`, Logo Blue `rgba(26,92,230,0.45)`, Sovereign White `rgba(248,250,252,0.35)`
   - Physics: Loop continuo con `requestAnimationFrame` + listeners de resize en canvas
 - **CSS:** `position: fixed; inset: 0; z-index: 0` — todo el contenido de página en `z-index: 1+`.
 - **Performance:** Vanilla Canvas 2D sin librerías externas. Respeta `prefers-reduced-motion`.
@@ -39,36 +39,39 @@ Evita el "AI Slop" (diseños genéricos, texto de relleno aburrido o layouts pre
 
 # 2. REGLAS DE ARQUITECTURA DEL SITIO (DO'S AND DON'TS)
 
-## ❌ PROHIBIDO — NO incluir en LandingPage.tsx:
+> ⚠️ La versión oficial y actual es **este proyecto Astro** (`src/pages/*.astro`). El directorio `legacy_repo/` (React SPA con LandingPage.tsx) es SOLO referencia histórica — nunca editarlo ni copiar su arquitectura.
 
-| Sección | Componente en código |
+## ❌ PROHIBIDO — NO incluir en la landing (`src/pages/index.astro`):
+
+| Sección |
+|---|
+| Manifiesto EHS 2.0 |
+| Sectores que Atendemos |
+| Tarjetas de experiencia (+10 años) |
+| Directorio de Servicios embebido (vive en `/catalogo`) |
+| Sustentabilidad Corporativa |
+| Process / Trust |
+
+## ✅ OBLIGATORIO — Debe existir en `src/pages/index.astro`:
+
+| Elemento | Ubicación |
 |---|---|
-| Manifiesto EHS 2.0 | `<ManifiestoSection />` |
-| Sectores que Atendemos | parte de `<SocialProof />` |
-| Tarjetas de experiencia (+10 años) | `<SocialProof />` |
-| Directorio de Servicios | `<CatalogSection4 />` |
-| Sustentabilidad Corporativa | `<Sustainability />` |
-| Process | `<Process />` |
-| Trust | `<Trust />` |
+| 3 Pilares (SST · MA · Sistemas de Gestión) | `<section id="pilares">` con `.adn-glass-card` |
+| Catálogo integrado | ruta `/catalogo/` (`src/pages/catalogo/`) |
+| Portal de Clientes | ruta `/clientes/` (cotizaciones con código de acceso) |
 
-> Los componentes pueden existir en `Sections.tsx` pero NO renderizarse en `LandingPage.tsx`.
-
-## ✅ OBLIGATORIO — Debe existir en LandingPage.tsx:
-
-| Elemento | Componente | Estado |
-|---|---|---|
-| 3 Pilares (SST · MA · ISO) | `<ServicePillars />` | ✅ Implementado |
-| CTA exacto del catálogo | En `<BrandResources />` | ✅ Implementado |
-| Catálogo integrado | `/catalogo/` route | ✅ Implementado |
-
-- **CTA obligatorio exacto:** `"VE NUESTROS ESTUDIOS Y CAPACITACIONES AQUÍ:"` — ya existe en `BrandResources`.
-- **Los 3 Pilares:** `ServicePillars.tsx` — tabs interactivos: "Seguridad y Salud", "Medio Ambiente", "Sistemas de Gestión".
-
-## Orden actual de LandingPage.tsx (CANÓNICO — no cambiar sin razón):
+## Orden actual de `src/pages/index.astro` (CANÓNICO — no cambiar sin razón):
 ```
-Hero → StatsBar → ServicePillars → ADNSection → TecnologiaSection
-→ BrandResources → ComplianceCalculator → Resources → FAQ
+Hero (video) → StatsBar → ADNSection → TechnologySection
+→ Pilares (#pilares) → ComplianceCalculator → GallerySection → CTA Final
 ```
+
+## Portal de Clientes (`/clientes`)
+- Cotizaciones en HTML: un archivo por cliente en `src/data/cotizaciones/<CODIGO>.html`.
+- Código de acceso = nombre del archivo: **2 letras (iniciales del cliente) + 4 dígitos aleatorios** (ej. `GD2035`). NUNCA consecutivos ni año.
+- `[folio].astro` genera la URL estática `/clientes/cotizaciones/<CODIGO>`; HTML completo se sirve tal cual.
+- Todas las cotizaciones llevan `<meta name="robots" content="noindex">` y metadata `<meta name="quote-*">`.
+- NUNCA publicar códigos ni nombres completos de clientes en páginas públicas.
 
 
 
@@ -86,11 +89,12 @@ Cuando redactes textos o descripciones de servicios, usa terminología técnica 
 
 # 4. STACK TÉCNICO
 
-- React 18.2 + TypeScript + Vite
-- Tailwind CSS v4.2.1 con `@import "tailwindcss"` (NO `@tailwind base/components/utilities`)
-- Framer Motion para animaciones (`useInView`, `motion.div`, `AnimatePresence`)
-- React Router DOM para rutas (`/`, `/catalogo`, `/servicios/*`)
+- **Astro 6** (static output) + TypeScript — páginas en `src/pages/*.astro`, componentes en `src/components/*.astro`
+- React 19 disponible vía `@astrojs/react` solo para islas interactivas (hoy no hay ninguna — preferir Astro + `<script>` vanilla)
+- Tailwind CSS v4.3 vía `@tailwindcss/vite` con `@import "tailwindcss"` (NO `@tailwind base/components/utilities`)
+- Animaciones: CSS keyframes + Canvas 2D vanilla. NO Framer Motion, NO React Router (eso era del legacy)
 - CSS Houdini `@property` para animación `--adn-angle` (conic-gradient del borde)
+- Node ≥22.12 · deploy estático (Vercel) · rutas por filesystem: `/`, `/catalogo`, `/clientes`, `/clientes/cotizaciones/[folio]`
 
 
 

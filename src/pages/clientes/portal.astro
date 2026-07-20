@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sql, TIPOS_DOCUMENTO, type Documento, type Empresa } from '../../lib/db';
+import { empresaEnSesion } from '../../lib/session';
+
+export const prerender = false;
+
+const empresaId = empresaEnSesion(Astro.cookies);
+if (!empresaId) return Astro.redirect('/clientes?error=sesion');
+
+const q = sql();
+const empresas = await q`SELECT * FROM empresas WHERE id = ${empresaId} AND activa` as unknown as Empresa[];
+if (empresas.length === 0) return Astro.redirect('/clientes?error=sesion');
+const empresa = empresas[0];
+
+const documentos = await q`
+  SELECT id, empresa_id, tipo, titulo, descripcion, archivo_nombre, archivo_mime, emitido, vence, visible, creado_en,
+         (html IS NOT NULL) AS es_html
+  FROM documentos
+  WHERE empresa_id = ${empresaId} AND visible
+  ORDER BY creado_en DESC
+` as unknown as (Documento & { es_html: boolean })[];
+
+const porTipo = new Map<string, typeof documentos>();
+for (const d of documentos) {
+  if (!porTipo.has(d.tipo)) porTipo.set(d.tipo, []);
+  porTipo.get(d.tipo)!.push(d);
+}
+
+const iconos: Record<string, string> = {
+  cotizacion: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  constancia: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  estudio: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  expediente: 'M9 12l2 2 4-4V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-3.5',
+  otro: 'M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+};
+
+const fmtFecha = (iso: string | null) =>
+  iso ? new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) : null;
+---
+
+<Layout
+  title={`Portal ${empresa.nombre_comercial ?? empresa.razon_social} | Vértice EHS`}
+  description="Panel de documentos del cliente."
+  robots="noindex, nofollow"
+>
+  <section class="py-32 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
+            <span class="w-2 h-2 rounded-full animate-pulse bg-hazard-green shadow-[0_0_8px_rgba(46,158,60,0.8)]"></span>
+            <span class="text-xs font-bold uppercase tracking-widest text-sovereign-white">Sesión activa · {empresa.codigo}</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-bold font-heading text-sovereign-white leading-tight">
+            <span class="gradient-title">{empresa.nombre_comercial ?? empresa.razon_social}</span>
+          </h1>
+          <p class="text-muted-steel mt-2 font-medium">{empresa.razon_social}</p>
+        </div>
+        <form method="POST" action="/api/salir">
+          <button type="submit" class="text-xs font-bold uppercase tracking-[0.2em] text-muted-steel hover:text-alert-orange transition-colors border border-white/10 rounded-full px-6 py-3">
+            Cerrar sesión
+          </button>
+        </form>
+      </div>
+
+      {documentos.length === 0 && (
+        <div class="adn-glass-card p-12 text-center">
+          <p class="text-muted-steel font-medium">Aún no hay documentos publicados para tu empresa. En cuanto Vértice EHS cargue tus cotizaciones, constancias DC-3 o estudios, aparecerán aquí.</p>
+        </div>
+      )}
+
+      {[...porTipo.entries()].map(([tipo, docs]) => (
+        <div class="mb-14">
+          <h2 class="text-xs font-black uppercase tracking-[0.4em] text-hazard-green mb-6">{TIPOS_DOCUMENTO[tipo as keyof typeof TIPOS_DOCUMENTO]}s</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {docs.map(d => (
+              <div class="adn-glass-card p-7 group relative overflow-hidden">
+                <div class="flex items-start gap-5">
+                  <div class="h-12 w-12 shrink-0 rounded-xl bg-hazard-green/10 text-hazard-green flex items-center justify-center border border-hazard-green/20">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconos[d.tipo] ?? iconos.otro} /></svg>
+                  </div>
+                  <div class="flex-grow min-w-0">
+                    <h3 class="font-bold font-heading text-sovereign-white leading-snug">{d.titulo}</h3>
+                    {d.descripcion && <p class="text-sm text-muted-steel mt-1">{d.descripcion}</p>}
+                    <p class="text-xs text-muted-steel mt-2">
+                      {fmtFecha(d.emitido) && `Emitido ${fmtFecha(d.emitido)}`}
+                      {fmtFecha(d.vence) && ` · vigente hasta ${fmtFecha(d.vence)}`}
+                    </p>
+                    <div class="flex gap-4 mt-4">
+                      <a href={`/api/documento/${d.id}`} target="_blank" class="text-sm font-bold text-logo-blue hover:text-sovereign-white transition-colors">Ver →</a>
+                      {!d.es_html && (
+                        <a href={`/api/documento/${d.id}?descargar`} class="text-sm font-bold text-hazard-green hover:text-sovereign-white transition-colors">Descargar ↓</a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+</Layout>

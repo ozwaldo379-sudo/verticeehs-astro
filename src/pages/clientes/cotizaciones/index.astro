@@ -1,81 +1,83 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Listado público de cotizaciones activas: solo servicio + fechas, extraídos de la
+// metadata <meta name="quote-*"> de cada archivo. NUNCA exponer cliente ni código.
+const dir = path.join(process.cwd(), 'src/data/cotizaciones');
+const meta = (html: string, name: string) =>
+  html.match(new RegExp(`<meta name="quote-${name}" content="([^"]*)"`))?.[1] ?? '';
+
+const cotizaciones = fs.existsSync(dir)
+  ? fs.readdirSync(dir)
+      .filter(f => f.endsWith('.html') && f !== 'ejemplo.html')
+      .map(f => {
+        const html = fs.readFileSync(path.join(dir, f), 'utf-8');
+        return {
+          servicio: meta(html, 'service'),
+          emitida: meta(html, 'issued'),
+          vence: meta(html, 'expires'),
+        };
+      })
+      .filter(c => c.servicio)
+      .sort((a, b) => b.emitida.localeCompare(a.emitida))
+  : [];
+
+const fmtFecha = (iso: string) =>
+  iso ? new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { month: 'short', year: 'numeric' }) : '';
 ---
 
-<Layout 
-  title="Acceso a Cotizaciones | Vértice EHS" 
+<Layout
+  title="Acceso a Cotizaciones | Vértice EHS"
   description="Accede a tu cotización personalizada de Vértice EHS con tu código único."
 >
-  <div class="min-h-screen relative overflow-hidden flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 text-slate-800 dark:text-sovereign-white pt-24">
-    
-    <!-- Floating Triangles for the "blue part" style requested by user -->
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-40 dark:opacity-30">
-      <svg class="absolute top-1/4 left-10 w-24 h-24 text-logo-blue/30 dark:text-logo-blue animate-[spin_20s_linear_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
-      </svg>
-      <svg class="absolute bottom-1/4 right-20 w-32 h-32 text-logo-blue/20 dark:text-logo-blue animate-[spin_30s_linear_infinite_reverse]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-        <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
-      </svg>
-      <svg class="absolute top-1/2 left-2/3 w-16 h-16 text-hazard-green/30 dark:text-hazard-green animate-[spin_15s_linear_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <polygon points="12,2 22,20 2,20" stroke-linejoin="round" />
-      </svg>
-    </div>
+  <section class="min-h-screen flex flex-col items-center justify-center py-32 px-4 sm:px-6 lg:px-8 gap-10">
+    <div class="adn-glass-card max-w-md w-full p-10 relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-hazard-green to-logo-blue opacity-80"></div>
 
-    {/* Fondo Animado / Ambient */}
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full blur-[100px] animate-pulse" style="background-color: rgba(10, 102, 184, 0.08);"></div>
-      <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full blur-[100px] animate-pulse" style="background-color: rgba(15, 143, 69, 0.08); animation-delay: 2s;"></div>
-    </div>
-
-    <!-- 3D Card Container -->
-    <div class="max-w-md w-full space-y-8 relative z-10 p-10 rounded-[2rem] border border-slate-200 dark:border-white/10 shadow-2xl backdrop-blur-xl bg-white/80 dark:bg-white/5 transition-all duration-500 perspective-1000" style="transform-style: preserve-3d; transition: transform 0.5s ease, box-shadow 0.5s ease;" onmouseover="this.style.transform='rotateX(3deg) rotateY(-3deg) translateZ(10px)'; this.style.boxShadow='-15px 15px 30px rgba(10, 102, 184, 0.15)';" onmouseout="this.style.transform='rotateX(0) rotateY(0) translateZ(0)'; this.style.boxShadow='0 25px 50px -12px rgb(0 0 0 / 0.15)';">
-      
-      <div class="text-center" style="transform: translateZ(20px);">
-        <h2 class="mt-2 text-3xl font-extrabold tracking-tight font-heading text-slate-900 dark:text-sovereign-white">
-          Acceso a Cotizaciones
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold font-heading mb-4 text-sovereign-white">
+          Acceso a <span class="gradient-title">Cotizaciones</span>
         </h2>
-        <p class="mt-4 text-sm text-slate-600 dark:text-muted-steel font-medium">
+        <p class="text-sm text-muted-steel font-medium">
           Ingresa el código único que te fue proporcionado para visualizar tu propuesta de servicio.
         </p>
       </div>
-      
-      <form class="mt-8 space-y-6" id="quote-form" style="transform: translateZ(20px);">
-        <div class="rounded-md shadow-sm -space-y-px">
-          <div>
-            <label for="codigo" class="sr-only">Código de Cotización</label>
-            <input 
-              id="codigo" 
-              name="codigo" 
-              type="text" 
-              required 
-              class="appearance-none rounded-xl relative block w-full px-4 py-4 border placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-hazard-green focus:z-10 sm:text-base transition-all duration-300 backdrop-blur-md bg-white dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-900 dark:text-white" 
-              placeholder="Ej: GD2035"
-              autocomplete="off"
-            >
-          </div>
+
+      <form class="space-y-6" id="quote-form">
+        <div>
+          <label for="codigo" class="sr-only">Código de Cotización</label>
+          <input
+            id="codigo"
+            name="codigo"
+            type="text"
+            required
+            class="appearance-none rounded-xl block w-full px-4 py-4 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-hazard-green sm:text-base transition-all duration-300 bg-white/5 border border-white/10 text-sovereign-white shadow-inner"
+            placeholder="Ej: GD2035"
+            autocomplete="off"
+          >
         </div>
 
-        <div id="error-message" class="hidden text-sm font-medium text-center py-2 rounded-lg border border-red-500/20 text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-500/10">
+        <div id="error-message" class="hidden text-sm font-medium text-center py-2 rounded-lg border border-red-400/30 text-red-400 bg-red-500/10">
           El código ingresado no es válido.
         </div>
 
-        <div>
-          <button 
-            type="submit" 
-            class="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white transition-all duration-300 hover:-translate-y-1 shadow-[0_8px_22px_rgba(15,143,69,0.3)] bg-gradient-to-r from-hazard-green to-logo-blue"
-          >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <svg class="h-5 w-5 text-white/70 group-hover:text-white transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-              </svg>
-            </span>
-            Ver Cotización
-          </button>
-        </div>
+        <button
+          type="submit"
+          class="group relative w-full flex justify-center py-4 px-4 text-sm font-bold rounded-xl text-white transition-all duration-300 hover:-translate-y-1 shadow-[0_8px_22px_rgba(46,158,60,0.3)] bg-gradient-to-r from-hazard-green to-logo-blue"
+        >
+          <span class="absolute left-0 inset-y-0 flex items-center pl-4">
+            <svg class="h-5 w-5 text-white/70 group-hover:text-white transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          Ver Cotización
+        </button>
       </form>
-      
-      <div class="mt-6 text-center" style="transform: translateZ(10px);">
-        <a href="/clientes" class="text-sm font-bold transition-colors inline-flex items-center gap-1 text-logo-blue hover:text-slate-900 dark:hover:text-sovereign-white">
+
+      <div class="mt-8 text-center">
+        <a href="/clientes" class="text-sm font-bold transition-colors inline-flex items-center gap-1 text-logo-blue hover:text-sovereign-white">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -83,7 +85,26 @@ import Layout from '../../../layouts/Layout.astro';
         </a>
       </div>
     </div>
-  </div>
+
+    {cotizaciones.length > 0 && (
+      <div class="max-w-md w-full">
+        <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-muted-steel mb-4 text-center">Cotizaciones activas</h3>
+        <ul class="space-y-3">
+          {cotizaciones.map(c => (
+            <li class="adn-glass-card p-5 flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-bold text-sovereign-white leading-snug">{c.servicio}</p>
+                <p class="text-xs text-muted-steel mt-1">
+                  Emitida {fmtFecha(c.emitida)}{c.vence && ` · vigente hasta ${fmtFecha(c.vence)}`}
+                </p>
+              </div>
+              <span class="text-[10px] font-black uppercase tracking-widest text-hazard-green whitespace-nowrap">Requiere código</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </section>
 </Layout>
 
 <script>
@@ -95,9 +116,9 @@ import Layout from '../../../layouts/Layout.astro';
     if (form && input && errorMessage) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const codigo = input.value.trim().toUpperCase();
-        
+
         if (!codigo) {
           errorMessage.textContent = 'Por favor, ingresa un código.';
           errorMessage.classList.remove('hidden');
@@ -110,21 +131,21 @@ import Layout from '../../../layouts/Layout.astro';
           errorMessage.classList.remove('hidden');
           return;
         }
-        
+
         // Hide error and redirect
         errorMessage.classList.add('hidden');
-        
+
         // Disable button to show processing state
         const btn = form.querySelector('button');
         if (btn) {
           btn.disabled = true;
           btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Buscando...';
         }
-        
+
         // Redirect to the dynamic route
         window.location.href = `/clientes/cotizaciones/${codigo}`;
       });
-      
+
       // Clear error on input
       input.addEventListener('input', () => {
         errorMessage.classList.add('hidden');

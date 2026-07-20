@@ -34,3 +34,5 @@ agents/
 !STRATEGY.MD
 !TASK.md
 .vercel
+graphify-out/
+

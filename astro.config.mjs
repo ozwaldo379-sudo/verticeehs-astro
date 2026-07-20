@@ -3,9 +3,13 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
+  // Sitio estático por defecto; las páginas del portal/admin declaran
+  // `export const prerender = false` para ejecutarse en servidor (Vercel Functions).
+  adapter: vercel(),
   vite: {
     plugins: [tailwindcss()]
   },

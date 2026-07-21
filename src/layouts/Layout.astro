@@ -63,26 +63,8 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
       }
     </script>
     
-    <!-- Theme Script (Day/Night Mode) -->
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light'; // Por defecto claro como lo solicitó el usuario
-      })();
-      if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
-      }
-      window.localStorage.setItem('theme', theme);
-    </script>
   </head>
-  <body class="bg-slate-50 dark:bg-deep-void text-slate-900 dark:text-sovereign-white min-h-screen flex flex-col font-body selection:bg-hazard-green selection:text-deep-void transition-colors duration-300 relative">
+  <body class="bg-deep-void text-sovereign-white min-h-screen flex flex-col font-body selection:bg-hazard-green selection:text-deep-void relative">
     
     <!-- Global ambient particle background -->
     <div class="fixed inset-0 z-0 pointer-events-none">
@@ -112,62 +94,73 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
           </nav>
 
           <div class="hidden md:flex items-center gap-4">
-            <!-- Botón de Día y Noche -->
-            <button id="theme-toggle" type="button" class="text-muted-steel hover:text-sovereign-white hover:bg-white/10 dark:hover:bg-white/10 rounded-full p-2.5 transition-all">
-              <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-              <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-            </button>
             <a href="https://wa.me/522224596850" target="_blank" class="btn-primary text-[10px] font-black uppercase tracking-widest px-6 py-3">
               Blindaje Normativo
             </a>
           </div>
 
           <!-- Mobile Menu Button -->
-          <button class="md:hidden text-sovereign-white" id="mobile-menu-btn">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          <button class="md:hidden relative z-50 text-sovereign-white" id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu-panel">
+            <svg id="mobile-menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <svg id="mobile-menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- Envolvemos main y footer con fondos sólidos en light mode para tapar las partículas, dejándolas solo en el header -->
-    <div class="relative z-10 bg-slate-50 dark:bg-transparent flex-grow flex flex-col transition-colors duration-300">
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="md:hidden fixed inset-0 z-40 bg-deep-void/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true"></div>
+
+    <!-- Mobile Menu Panel -->
+    <nav id="mobile-menu-panel" class="md:hidden fixed top-20 left-4 right-4 z-40 mt-2 adn-glass-card bg-charcoal-surface/95 border border-white/5 rounded-2xl p-6 -translate-y-4 opacity-0 pointer-events-none transition-all duration-300" aria-hidden="true">
+      <div class="flex flex-col gap-6">
+        <a href="/" class="mobile-menu-link text-sm font-bold uppercase tracking-[0.2em] text-muted-steel hover:text-hazard-green transition-colors">Inicio</a>
+        <a href="/catalogo" class="mobile-menu-link text-sm font-bold uppercase tracking-[0.2em] text-muted-steel hover:text-hazard-green transition-colors">Catálogo NOMs</a>
+        <a href="/clientes" class="mobile-menu-link text-sm font-bold uppercase tracking-[0.2em] text-sovereign-white hover:text-hazard-green transition-colors">Clientes</a>
+        <div class="h-px bg-white/10"></div>
+        <a href="https://wa.me/522224596850" target="_blank" class="mobile-menu-link btn-primary text-center text-[10px] font-black uppercase tracking-widest px-6 py-3">
+          Blindaje Normativo
+        </a>
+      </div>
+    </nav>
+
+    <div class="relative z-10 flex-grow flex flex-col">
       <main class="flex-grow pt-20 relative">
         <slot />
       </main>
 
-      <!-- Premium Footer (Se adaptará a claro u oscuro) -->
-      <footer class="bg-slate-100 dark:bg-charcoal-surface/50 border-t border-slate-200 dark:border-white/5 py-24 relative overflow-hidden transition-colors duration-300">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-200 dark:to-deep-void opacity-50"></div>
+      <!-- Premium Footer -->
+      <footer class="bg-charcoal-surface/50 border-t border-white/5 py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-deep-void opacity-50"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-24">
             <div class="col-span-1 md:col-span-2">
               <div class="flex items-center gap-3">
-                <img src="/logo.png" alt="Vértice EHS Logo" class="h-12 w-auto object-contain dark:brightness-100 brightness-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <img src="/logo.png" alt="Vértice EHS Logo" class="h-12 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
               </div>
-              <p class="mt-8 text-xl text-slate-600 dark:text-muted-steel leading-relaxed max-w-md">
+              <p class="mt-8 text-xl text-muted-steel leading-relaxed max-w-md">
                 Ingeniería estratégica en cumplimiento normativo y blindaje industrial para el mercado mexicano.
               </p>
             </div>
-            
+
             <div>
               <h3 class="text-[10px] font-black text-hazard-green uppercase tracking-[0.4em] mb-8">SOLUCIONES</h3>
               <ul class="space-y-4">
-                <li><a href="/catalogo#seguridad" class="text-sm font-medium text-slate-500 dark:text-muted-steel hover:text-slate-900 dark:hover:text-sovereign-white transition-colors">Seguridad STPS</a></li>
-                <li><a href="/catalogo#medio-ambiente" class="text-sm font-medium text-slate-500 dark:text-muted-steel hover:text-slate-900 dark:hover:text-sovereign-white transition-colors">Medio Ambiente</a></li>
-                <li><a href="/catalogo#sistemas" class="text-sm font-medium text-slate-500 dark:text-muted-steel hover:text-slate-900 dark:hover:text-sovereign-white transition-colors">ISO 45001 / 14001</a></li>
+                <li><a href="/catalogo#seguridad" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">Seguridad STPS</a></li>
+                <li><a href="/catalogo#medio-ambiente" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">Medio Ambiente</a></li>
+                <li><a href="/catalogo#sistemas" class="text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors">ISO 45001 / 14001</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h3 class="text-[10px] font-black text-hazard-green uppercase tracking-[0.4em] mb-8">CONTACTO</h3>
               <ul class="space-y-4">
-                <li class="flex items-center gap-3 text-sm font-medium text-slate-500 dark:text-muted-steel">
+                <li class="flex items-center gap-3 text-sm font-medium text-muted-steel">
                   <svg class="w-4 h-4 text-hazard-green/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                   Puebla, México
                 </li>
                 <li>
-                  <a href="mailto:ventas@verticeehs.com" class="flex items-center gap-3 text-sm font-medium text-slate-500 dark:text-muted-steel hover:text-slate-900 dark:hover:text-sovereign-white transition-colors group">
+                  <a href="mailto:ventas@verticeehs.com" class="flex items-center gap-3 text-sm font-medium text-muted-steel hover:text-sovereign-white transition-colors group">
                     <svg class="w-4 h-4 text-hazard-green/60 group-hover:text-hazard-green transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     ventas@verticeehs.com
                   </a>
@@ -175,14 +168,14 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
               </ul>
             </div>
           </div>
-          
-          <div class="mt-24 pt-12 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-[10px] font-bold text-slate-400 dark:text-muted-steel uppercase tracking-widest">
+
+          <div class="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-[10px] font-bold text-muted-steel uppercase tracking-widest">
               &copy; {new Date().getFullYear()} VÉRTICE EHS CONSULTORÍA. TODOS LOS DERECHOS RESERVADOS.
             </p>
             <div class="flex gap-8">
-              <a href="#" class="text-[10px] font-bold text-slate-400 dark:text-muted-steel hover:text-hazard-green uppercase tracking-widest transition-colors">Privacidad</a>
-              <a href="#" class="text-[10px] font-bold text-slate-400 dark:text-muted-steel hover:text-hazard-green uppercase tracking-widest transition-colors">Términos</a>
+              <a href="#" class="text-[10px] font-bold text-muted-steel hover:text-hazard-green uppercase tracking-widest transition-colors">Privacidad</a>
+              <a href="#" class="text-[10px] font-bold text-muted-steel hover:text-hazard-green uppercase tracking-widest transition-colors">Términos</a>
             </div>
           </div>
         </div>
@@ -202,38 +195,39 @@ const { title, description = "Vértice EHS - Consultoría en Normatividad STPS, 
         }
       });
 
-      // Day/Night Toggle Logic
-      const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-      const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-      const themeToggleBtn = document.getElementById('theme-toggle');
+      // Mobile Menu Toggle Logic
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenuIconOpen = document.getElementById('mobile-menu-icon-open');
+      const mobileMenuIconClose = document.getElementById('mobile-menu-icon-close');
+      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+      const mobileMenuPanel = document.getElementById('mobile-menu-panel');
 
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          themeToggleLightIcon?.classList.remove('hidden');
-      } else {
-          themeToggleDarkIcon?.classList.remove('hidden');
+      function setMobileMenuOpen(open) {
+          mobileMenuBtn?.setAttribute('aria-expanded', String(open));
+          mobileMenuIconOpen?.classList.toggle('hidden', open);
+          mobileMenuIconClose?.classList.toggle('hidden', !open);
+          [mobileMenuOverlay, mobileMenuPanel].forEach((el) => {
+              el?.classList.toggle('opacity-0', !open);
+              el?.classList.toggle('pointer-events-none', !open);
+              el?.setAttribute('aria-hidden', String(!open));
+          });
+          mobileMenuPanel?.classList.toggle('-translate-y-4', !open);
+          document.body.classList.toggle('overflow-hidden', open);
       }
 
-      themeToggleBtn?.addEventListener('click', function() {
-          themeToggleDarkIcon?.classList.toggle('hidden');
-          themeToggleLightIcon?.classList.toggle('hidden');
+      mobileMenuBtn?.addEventListener('click', () => {
+          setMobileMenuOpen(mobileMenuBtn.getAttribute('aria-expanded') !== 'true');
+      });
 
-          if (localStorage.getItem('theme')) {
-              if (localStorage.getItem('theme') === 'light') {
-                  document.documentElement.classList.add('dark');
-                  localStorage.setItem('theme', 'dark');
-              } else {
-                  document.documentElement.classList.remove('dark');
-                  localStorage.setItem('theme', 'light');
-              }
-          } else {
-              if (document.documentElement.classList.contains('dark')) {
-                  document.documentElement.classList.remove('dark');
-                  localStorage.setItem('theme', 'light');
-              } else {
-                  document.documentElement.classList.add('dark');
-                  localStorage.setItem('theme', 'dark');
-              }
-          }
+      mobileMenuOverlay?.addEventListener('click', () => setMobileMenuOpen(false));
+
+      document.querySelectorAll('.mobile-menu-link').forEach((link) => {
+          link.addEventListener('click', () => setMobileMenuOpen(false));
+      });
+
+      // Cerrar menú móvil si el viewport cruza a desktop (ej. rotar a horizontal en tablets)
+      window.addEventListener('resize', () => {
+          if (window.innerWidth >= 768) setMobileMenuOpen(false);
       });
     </script>
   </body>

@@ -35,4 +35,5 @@ agents/
 !TASK.md
 .vercel
 graphify-out/
-
+.claude/
+.gemini/
